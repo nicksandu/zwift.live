@@ -264,13 +264,13 @@ $config = [
         ],
         'product-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Product_Grid',
-            'condition' => [
-                'function_exists',
-                'WC',
-            ],
             'dependency' => [
                 'css' => [
-                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/components/load-more.min.css',
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/product-grid/index.min.css'
+                ],
+                'js' => [
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/load-more/load-more.min.js',
                 ],
             ],
         ],
@@ -297,6 +297,14 @@ $config = [
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/ninja-form/index.min.css',
                 ],
             ],
+        ],
+        'formstack' => [
+            'class' => '\Essential_Addons_Elementor\Elements\Formstack',
+             'dependency' => [
+                 'css' => [
+                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/css/formstack/index.min.css',
+                 ],
+             ],
         ],
         'gravity-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\GravityForms',
@@ -333,10 +341,10 @@ $config = [
         'betterdocs-category-grid' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Grid',
         ],
-        'betterdocs-category-box'   => [
+        'betterdocs-category-box' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Category_Box',
         ],
-        'betterdocs-search-form'   => [
+        'betterdocs-search-form' => [
             'class' => '\Essential_Addons_Elementor\Elements\Betterdocs_Search_Form',
         ],
         'sticky-video' => [
@@ -364,6 +372,7 @@ $config = [
                 ],
                 'js' => [
                     ///add moment.js code in calendar-main.js
+                    EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/locales-all.min.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/calendar-main.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/daygrid.js',
                     EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/vendor/event-calendar/timegrid.js',
@@ -372,8 +381,19 @@ $config = [
                 ],
             ],
         ],
+        'embedpress' => [
+            'class' => '\Essential_Addons_Elementor\Elements\EmbedPress',
+            'condition' => [
+                'class_exists',
+                '\EmbedPress\Elementor\Embedpress_Elementor_Integration',
+                 true
+            ]
+        ],
     ],
     'extensions' => [
+        'eael-promotion' => [
+            'class' => '\Essential_Addons_Elementor\Extensions\Promotion',
+        ],
         'eael-reading-progress' => [
             'class' => '\Essential_Addons_Elementor\Extensions\Reading_Progress',
             'dependency' => [
@@ -397,8 +417,8 @@ $config = [
             ],
         ],
         'eael-post-duplicator' => [
-            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator'
-        ]
+            'class' => '\Essential_Addons_Elementor\Extensions\Post_Duplicator',
+        ],
     ],
 ];
 

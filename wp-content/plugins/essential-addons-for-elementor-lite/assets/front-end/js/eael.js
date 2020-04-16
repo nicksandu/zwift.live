@@ -269,1132 +269,6 @@
 
 });
 
-!function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
-!function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
-
-/*!
- * Morphext - Text Rotating Plugin for jQuery
- * https://github.com/MrSaints/Morphext
- *
- * Built on jQuery Boilerplate
- * http://jqueryboilerplate.com/
- *
- * Copyright 2014 Ian Lai and other contributors
- * Released under the MIT license
- * http://ian.mit-license.org/
- */
-
-/*eslint-env browser */
-/*global jQuery:false */
-/*eslint-disable no-underscore-dangle */
-
-(function ($) {
-    "use strict";
-
-    var pluginName = "Morphext",
-        defaults = {
-            animation: "bounceIn",
-            separator: ",",
-            speed: 2000,
-            complete: $.noop
-        };
-
-    function Plugin (element, options) {
-        this.element = $(element);
-
-        this.settings = $.extend({}, defaults, options);
-        this._defaults = defaults;
-        this._init();
-    }
-
-    Plugin.prototype = {
-        _init: function () {
-            var $that = this;
-            this.phrases = [];
-
-            this.element.addClass("morphext");
-
-            $.each(this.element.text().split(this.settings.separator), function (key, value) {
-                $that.phrases.push($.trim(value));
-            });
-
-            this.index = -1;
-            this.animate();
-            this.start();
-        },
-        animate: function () {
-            this.index = ++this.index % this.phrases.length;
-            this.element[0].innerHTML = "<span class=\"animated " + this.settings.animation + "\">" + this.phrases[this.index] + "</span>";
-
-            if ($.isFunction(this.settings.complete)) {
-                this.settings.complete.call(this);
-            }
-        },
-        start: function () {
-            var $that = this;
-            this._interval = setInterval(function () {
-                $that.animate();
-            }, this.settings.speed);
-        },
-        stop: function () {
-            this._interval = clearInterval(this._interval);
-        }
-    };
-
-    $.fn[pluginName] = function (options) {
-        return this.each(function() {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
-            }
-        });
-    };
-})(jQuery);
-
-/*!
- * 
- *   typed.js - A JavaScript Typing Animation Library
- *   Author: Matt Boldt <me@mattboldt.com>
- *   Version: v2.0.9
- *   Url: https://github.com/mattboldt/typed.js
- *   License(s): MIT
- * 
- */
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["Typed"] = factory();
-	else
-		root["Typed"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var _initializerJs = __webpack_require__(1);
-	
-	var _htmlParserJs = __webpack_require__(3);
-	
-	/**
-	 * Welcome to Typed.js!
-	 * @param {string} elementId HTML element ID _OR_ HTML element
-	 * @param {object} options options object
-	 * @returns {object} a new Typed object
-	 */
-	
-	var Typed = (function () {
-	  function Typed(elementId, options) {
-	    _classCallCheck(this, Typed);
-	
-	    // Initialize it up
-	    _initializerJs.initializer.load(this, options, elementId);
-	    // All systems go!
-	    this.begin();
-	  }
-	
-	  /**
-	   * Toggle start() and stop() of the Typed instance
-	   * @public
-	   */
-	
-	  _createClass(Typed, [{
-	    key: 'toggle',
-	    value: function toggle() {
-	      this.pause.status ? this.start() : this.stop();
-	    }
-	
-	    /**
-	     * Stop typing / backspacing and enable cursor blinking
-	     * @public
-	     */
-	  }, {
-	    key: 'stop',
-	    value: function stop() {
-	      if (this.typingComplete) return;
-	      if (this.pause.status) return;
-	      this.toggleBlinking(true);
-	      this.pause.status = true;
-	      this.options.onStop(this.arrayPos, this);
-	    }
-	
-	    /**
-	     * Start typing / backspacing after being stopped
-	     * @public
-	     */
-	  }, {
-	    key: 'start',
-	    value: function start() {
-	      if (this.typingComplete) return;
-	      if (!this.pause.status) return;
-	      this.pause.status = false;
-	      if (this.pause.typewrite) {
-	        this.typewrite(this.pause.curString, this.pause.curStrPos);
-	      } else {
-	        this.backspace(this.pause.curString, this.pause.curStrPos);
-	      }
-	      this.options.onStart(this.arrayPos, this);
-	    }
-	
-	    /**
-	     * Destroy this instance of Typed
-	     * @public
-	     */
-	  }, {
-	    key: 'destroy',
-	    value: function destroy() {
-	      this.reset(false);
-	      this.options.onDestroy(this);
-	    }
-	
-	    /**
-	     * Reset Typed and optionally restarts
-	     * @param {boolean} restart
-	     * @public
-	     */
-	  }, {
-	    key: 'reset',
-	    value: function reset() {
-	      var restart = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-	
-	      clearInterval(this.timeout);
-	      this.replaceText('');
-	      if (this.cursor && this.cursor.parentNode) {
-	        this.cursor.parentNode.removeChild(this.cursor);
-	        this.cursor = null;
-	      }
-	      this.strPos = 0;
-	      this.arrayPos = 0;
-	      this.curLoop = 0;
-	      if (restart) {
-	        this.insertCursor();
-	        this.options.onReset(this);
-	        this.begin();
-	      }
-	    }
-	
-	    /**
-	     * Begins the typing animation
-	     * @private
-	     */
-	  }, {
-	    key: 'begin',
-	    value: function begin() {
-	      var _this = this;
-	
-	      this.typingComplete = false;
-	      this.shuffleStringsIfNeeded(this);
-	      this.insertCursor();
-	      if (this.bindInputFocusEvents) this.bindFocusEvents();
-	      this.timeout = setTimeout(function () {
-	        // Check if there is some text in the element, if yes start by backspacing the default message
-	        if (!_this.currentElContent || _this.currentElContent.length === 0) {
-	          _this.typewrite(_this.strings[_this.sequence[_this.arrayPos]], _this.strPos);
-	        } else {
-	          // Start typing
-	          _this.backspace(_this.currentElContent, _this.currentElContent.length);
-	        }
-	      }, this.startDelay);
-	    }
-	
-	    /**
-	     * Called for each character typed
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'typewrite',
-	    value: function typewrite(curString, curStrPos) {
-	      var _this2 = this;
-	
-	      if (this.fadeOut && this.el.classList.contains(this.fadeOutClass)) {
-	        this.el.classList.remove(this.fadeOutClass);
-	        if (this.cursor) this.cursor.classList.remove(this.fadeOutClass);
-	      }
-	
-	      var humanize = this.humanizer(this.typeSpeed);
-	      var numChars = 1;
-	
-	      if (this.pause.status === true) {
-	        this.setPauseStatus(curString, curStrPos, true);
-	        return;
-	      }
-	
-	      // contain typing function in a timeout humanize'd delay
-	      this.timeout = setTimeout(function () {
-	        // skip over any HTML chars
-	        curStrPos = _htmlParserJs.htmlParser.typeHtmlChars(curString, curStrPos, _this2);
-	
-	        var pauseTime = 0;
-	        var substr = curString.substr(curStrPos);
-	        // check for an escape character before a pause value
-	        // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
-	        // single ^ are removed from string
-	        if (substr.charAt(0) === '^') {
-	          if (/^\^\d+/.test(substr)) {
-	            var skip = 1; // skip at least 1
-	            substr = /\d+/.exec(substr)[0];
-	            skip += substr.length;
-	            pauseTime = parseInt(substr);
-	            _this2.temporaryPause = true;
-	            _this2.options.onTypingPaused(_this2.arrayPos, _this2);
-	            // strip out the escape character and pause value so they're not printed
-	            curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
-	            _this2.toggleBlinking(true);
-	          }
-	        }
-	
-	        // check for skip characters formatted as
-	        // "this is a `string to print NOW` ..."
-	        if (substr.charAt(0) === '`') {
-	          while (curString.substr(curStrPos + numChars).charAt(0) !== '`') {
-	            numChars++;
-	            if (curStrPos + numChars > curString.length) break;
-	          }
-	          // strip out the escape characters and append all the string in between
-	          var stringBeforeSkip = curString.substring(0, curStrPos);
-	          var stringSkipped = curString.substring(stringBeforeSkip.length + 1, curStrPos + numChars);
-	          var stringAfterSkip = curString.substring(curStrPos + numChars + 1);
-	          curString = stringBeforeSkip + stringSkipped + stringAfterSkip;
-	          numChars--;
-	        }
-	
-	        // timeout for any pause after a character
-	        _this2.timeout = setTimeout(function () {
-	          // Accounts for blinking while paused
-	          _this2.toggleBlinking(false);
-	
-	          // We're done with this sentence!
-	          if (curStrPos >= curString.length) {
-	            _this2.doneTyping(curString, curStrPos);
-	          } else {
-	            _this2.keepTyping(curString, curStrPos, numChars);
-	          }
-	          // end of character pause
-	          if (_this2.temporaryPause) {
-	            _this2.temporaryPause = false;
-	            _this2.options.onTypingResumed(_this2.arrayPos, _this2);
-	          }
-	        }, pauseTime);
-	
-	        // humanized value for typing
-	      }, humanize);
-	    }
-	
-	    /**
-	     * Continue to the next string & begin typing
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'keepTyping',
-	    value: function keepTyping(curString, curStrPos, numChars) {
-	      // call before functions if applicable
-	      if (curStrPos === 0) {
-	        this.toggleBlinking(false);
-	        this.options.preStringTyped(this.arrayPos, this);
-	      }
-	      // start typing each new char into existing string
-	      // curString: arg, this.el.html: original text inside element
-	      curStrPos += numChars;
-	      var nextString = curString.substr(0, curStrPos);
-	      this.replaceText(nextString);
-	      // loop the function
-	      this.typewrite(curString, curStrPos);
-	    }
-	
-	    /**
-	     * We're done typing all strings
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'doneTyping',
-	    value: function doneTyping(curString, curStrPos) {
-	      var _this3 = this;
-	
-	      // fires callback function
-	      this.options.onStringTyped(this.arrayPos, this);
-	      this.toggleBlinking(true);
-	      // is this the final string
-	      if (this.arrayPos === this.strings.length - 1) {
-	        // callback that occurs on the last typed string
-	        this.complete();
-	        // quit if we wont loop back
-	        if (this.loop === false || this.curLoop === this.loopCount) {
-	          return;
-	        }
-	      }
-	      this.timeout = setTimeout(function () {
-	        _this3.backspace(curString, curStrPos);
-	      }, this.backDelay);
-	    }
-	
-	    /**
-	     * Backspaces 1 character at a time
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @private
-	     */
-	  }, {
-	    key: 'backspace',
-	    value: function backspace(curString, curStrPos) {
-	      var _this4 = this;
-	
-	      if (this.pause.status === true) {
-	        this.setPauseStatus(curString, curStrPos, true);
-	        return;
-	      }
-	      if (this.fadeOut) return this.initFadeOut();
-	
-	      this.toggleBlinking(false);
-	      var humanize = this.humanizer(this.backSpeed);
-	
-	      this.timeout = setTimeout(function () {
-	        curStrPos = _htmlParserJs.htmlParser.backSpaceHtmlChars(curString, curStrPos, _this4);
-	        // replace text with base text + typed characters
-	        var curStringAtPosition = curString.substr(0, curStrPos);
-	        _this4.replaceText(curStringAtPosition);
-	
-	        // if smartBack is enabled
-	        if (_this4.smartBackspace) {
-	          // the remaining part of the current string is equal of the same part of the new string
-	          var nextString = _this4.strings[_this4.arrayPos + 1];
-	          if (nextString && curStringAtPosition === nextString.substr(0, curStrPos)) {
-	            _this4.stopNum = curStrPos;
-	          } else {
-	            _this4.stopNum = 0;
-	          }
-	        }
-	
-	        // if the number (id of character in current string) is
-	        // less than the stop number, keep going
-	        if (curStrPos > _this4.stopNum) {
-	          // subtract characters one by one
-	          curStrPos--;
-	          // loop the function
-	          _this4.backspace(curString, curStrPos);
-	        } else if (curStrPos <= _this4.stopNum) {
-	          // if the stop number has been reached, increase
-	          // array position to next string
-	          _this4.arrayPos++;
-	          // When looping, begin at the beginning after backspace complete
-	          if (_this4.arrayPos === _this4.strings.length) {
-	            _this4.arrayPos = 0;
-	            _this4.options.onLastStringBackspaced();
-	            _this4.shuffleStringsIfNeeded();
-	            _this4.begin();
-	          } else {
-	            _this4.typewrite(_this4.strings[_this4.sequence[_this4.arrayPos]], curStrPos);
-	          }
-	        }
-	        // humanized value for typing
-	      }, humanize);
-	    }
-	
-	    /**
-	     * Full animation is complete
-	     * @private
-	     */
-	  }, {
-	    key: 'complete',
-	    value: function complete() {
-	      this.options.onComplete(this);
-	      if (this.loop) {
-	        this.curLoop++;
-	      } else {
-	        this.typingComplete = true;
-	      }
-	    }
-	
-	    /**
-	     * Has the typing been stopped
-	     * @param {string} curString the current string in the strings array
-	     * @param {number} curStrPos the current position in the curString
-	     * @param {boolean} isTyping
-	     * @private
-	     */
-	  }, {
-	    key: 'setPauseStatus',
-	    value: function setPauseStatus(curString, curStrPos, isTyping) {
-	      this.pause.typewrite = isTyping;
-	      this.pause.curString = curString;
-	      this.pause.curStrPos = curStrPos;
-	    }
-	
-	    /**
-	     * Toggle the blinking cursor
-	     * @param {boolean} isBlinking
-	     * @private
-	     */
-	  }, {
-	    key: 'toggleBlinking',
-	    value: function toggleBlinking(isBlinking) {
-	      if (!this.cursor) return;
-	      // if in paused state, don't toggle blinking a 2nd time
-	      if (this.pause.status) return;
-	      if (this.cursorBlinking === isBlinking) return;
-	      this.cursorBlinking = isBlinking;
-	      if (isBlinking) {
-	        this.cursor.classList.add('typed-cursor--blink');
-	      } else {
-	        this.cursor.classList.remove('typed-cursor--blink');
-	      }
-	    }
-	
-	    /**
-	     * Speed in MS to type
-	     * @param {number} speed
-	     * @private
-	     */
-	  }, {
-	    key: 'humanizer',
-	    value: function humanizer(speed) {
-	      return Math.round(Math.random() * speed / 2) + speed;
-	    }
-	
-	    /**
-	     * Shuffle the sequence of the strings array
-	     * @private
-	     */
-	  }, {
-	    key: 'shuffleStringsIfNeeded',
-	    value: function shuffleStringsIfNeeded() {
-	      if (!this.shuffle) return;
-	      this.sequence = this.sequence.sort(function () {
-	        return Math.random() - 0.5;
-	      });
-	    }
-	
-	    /**
-	     * Adds a CSS class to fade out current string
-	     * @private
-	     */
-	  }, {
-	    key: 'initFadeOut',
-	    value: function initFadeOut() {
-	      var _this5 = this;
-	
-	      this.el.className += ' ' + this.fadeOutClass;
-	      if (this.cursor) this.cursor.className += ' ' + this.fadeOutClass;
-	      return setTimeout(function () {
-	        _this5.arrayPos++;
-	        _this5.replaceText('');
-	
-	        // Resets current string if end of loop reached
-	        if (_this5.strings.length > _this5.arrayPos) {
-	          _this5.typewrite(_this5.strings[_this5.sequence[_this5.arrayPos]], 0);
-	        } else {
-	          _this5.typewrite(_this5.strings[0], 0);
-	          _this5.arrayPos = 0;
-	        }
-	      }, this.fadeOutDelay);
-	    }
-	
-	    /**
-	     * Replaces current text in the HTML element
-	     * depending on element type
-	     * @param {string} str
-	     * @private
-	     */
-	  }, {
-	    key: 'replaceText',
-	    value: function replaceText(str) {
-	      if (this.attr) {
-	        this.el.setAttribute(this.attr, str);
-	      } else {
-	        if (this.isInput) {
-	          this.el.value = str;
-	        } else if (this.contentType === 'html') {
-	          this.el.innerHTML = str;
-	        } else {
-	          this.el.textContent = str;
-	        }
-	      }
-	    }
-	
-	    /**
-	     * If using input elements, bind focus in order to
-	     * start and stop the animation
-	     * @private
-	     */
-	  }, {
-	    key: 'bindFocusEvents',
-	    value: function bindFocusEvents() {
-	      var _this6 = this;
-	
-	      if (!this.isInput) return;
-	      this.el.addEventListener('focus', function (e) {
-	        _this6.stop();
-	      });
-	      this.el.addEventListener('blur', function (e) {
-	        if (_this6.el.value && _this6.el.value.length !== 0) {
-	          return;
-	        }
-	        _this6.start();
-	      });
-	    }
-	
-	    /**
-	     * On init, insert the cursor element
-	     * @private
-	     */
-	  }, {
-	    key: 'insertCursor',
-	    value: function insertCursor() {
-	      if (!this.showCursor) return;
-	      if (this.cursor) return;
-	      this.cursor = document.createElement('span');
-	      this.cursor.className = 'typed-cursor';
-	      this.cursor.innerHTML = this.cursorChar;
-	      this.el.parentNode && this.el.parentNode.insertBefore(this.cursor, this.el.nextSibling);
-	    }
-	  }]);
-	
-	  return Typed;
-	})();
-	
-	exports['default'] = Typed;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var _defaultsJs = __webpack_require__(2);
-	
-	var _defaultsJs2 = _interopRequireDefault(_defaultsJs);
-	
-	/**
-	 * Initialize the Typed object
-	 */
-	
-	var Initializer = (function () {
-	  function Initializer() {
-	    _classCallCheck(this, Initializer);
-	  }
-	
-	  _createClass(Initializer, [{
-	    key: 'load',
-	
-	    /**
-	     * Load up defaults & options on the Typed instance
-	     * @param {Typed} self instance of Typed
-	     * @param {object} options options object
-	     * @param {string} elementId HTML element ID _OR_ instance of HTML element
-	     * @private
-	     */
-	
-	    value: function load(self, options, elementId) {
-	      // chosen element to manipulate text
-	      if (typeof elementId === 'string') {
-	        self.el = document.querySelector(elementId);
-	      } else {
-	        self.el = elementId;
-	      }
-	
-	      self.options = _extends({}, _defaultsJs2['default'], options);
-	
-	      // attribute to type into
-	      self.isInput = self.el.tagName.toLowerCase() === 'input';
-	      self.attr = self.options.attr;
-	      self.bindInputFocusEvents = self.options.bindInputFocusEvents;
-	
-	      // show cursor
-	      self.showCursor = self.isInput ? false : self.options.showCursor;
-	
-	      // custom cursor
-	      self.cursorChar = self.options.cursorChar;
-	
-	      // Is the cursor blinking
-	      self.cursorBlinking = true;
-	
-	      // text content of element
-	      self.elContent = self.attr ? self.el.getAttribute(self.attr) : self.el.textContent;
-	
-	      // html or plain text
-	      self.contentType = self.options.contentType;
-	
-	      // typing speed
-	      self.typeSpeed = self.options.typeSpeed;
-	
-	      // add a delay before typing starts
-	      self.startDelay = self.options.startDelay;
-	
-	      // backspacing speed
-	      self.backSpeed = self.options.backSpeed;
-	
-	      // only backspace what doesn't match the previous string
-	      self.smartBackspace = self.options.smartBackspace;
-	
-	      // amount of time to wait before backspacing
-	      self.backDelay = self.options.backDelay;
-	
-	      // Fade out instead of backspace
-	      self.fadeOut = self.options.fadeOut;
-	      self.fadeOutClass = self.options.fadeOutClass;
-	      self.fadeOutDelay = self.options.fadeOutDelay;
-	
-	      // variable to check whether typing is currently paused
-	      self.isPaused = false;
-	
-	      // input strings of text
-	      self.strings = self.options.strings.map(function (s) {
-	        return s.trim();
-	      });
-	
-	      // div containing strings
-	      if (typeof self.options.stringsElement === 'string') {
-	        self.stringsElement = document.querySelector(self.options.stringsElement);
-	      } else {
-	        self.stringsElement = self.options.stringsElement;
-	      }
-	
-	      if (self.stringsElement) {
-	        self.strings = [];
-	        self.stringsElement.style.display = 'none';
-	        var strings = Array.prototype.slice.apply(self.stringsElement.children);
-	        var stringsLength = strings.length;
-	
-	        if (stringsLength) {
-	          for (var i = 0; i < stringsLength; i += 1) {
-	            var stringEl = strings[i];
-	            self.strings.push(stringEl.innerHTML.trim());
-	          }
-	        }
-	      }
-	
-	      // character number position of current string
-	      self.strPos = 0;
-	
-	      // current array position
-	      self.arrayPos = 0;
-	
-	      // index of string to stop backspacing on
-	      self.stopNum = 0;
-	
-	      // Looping logic
-	      self.loop = self.options.loop;
-	      self.loopCount = self.options.loopCount;
-	      self.curLoop = 0;
-	
-	      // shuffle the strings
-	      self.shuffle = self.options.shuffle;
-	      // the order of strings
-	      self.sequence = [];
-	
-	      self.pause = {
-	        status: false,
-	        typewrite: true,
-	        curString: '',
-	        curStrPos: 0
-	      };
-	
-	      // When the typing is complete (when not looped)
-	      self.typingComplete = false;
-	
-	      // Set the order in which the strings are typed
-	      for (var i in self.strings) {
-	        self.sequence[i] = i;
-	      }
-	
-	      // If there is some text in the element
-	      self.currentElContent = this.getCurrentElContent(self);
-	
-	      self.autoInsertCss = self.options.autoInsertCss;
-	
-	      this.appendAnimationCss(self);
-	    }
-	  }, {
-	    key: 'getCurrentElContent',
-	    value: function getCurrentElContent(self) {
-	      var elContent = '';
-	      if (self.attr) {
-	        elContent = self.el.getAttribute(self.attr);
-	      } else if (self.isInput) {
-	        elContent = self.el.value;
-	      } else if (self.contentType === 'html') {
-	        elContent = self.el.innerHTML;
-	      } else {
-	        elContent = self.el.textContent;
-	      }
-	      return elContent;
-	    }
-	  }, {
-	    key: 'appendAnimationCss',
-	    value: function appendAnimationCss(self) {
-	      var cssDataName = 'data-typed-js-css';
-	      if (!self.autoInsertCss) {
-	        return;
-	      }
-	      if (!self.showCursor && !self.fadeOut) {
-	        return;
-	      }
-	      if (document.querySelector('[' + cssDataName + ']')) {
-	        return;
-	      }
-	
-	      var css = document.createElement('style');
-	      css.type = 'text/css';
-	      css.setAttribute(cssDataName, true);
-	
-	      var innerCss = '';
-	      if (self.showCursor) {
-	        innerCss += '\n        .typed-cursor{\n          opacity: 1;\n        }\n        .typed-cursor.typed-cursor--blink{\n          animation: typedjsBlink 0.7s infinite;\n          -webkit-animation: typedjsBlink 0.7s infinite;\n                  animation: typedjsBlink 0.7s infinite;\n        }\n        @keyframes typedjsBlink{\n          50% { opacity: 0.0; }\n        }\n        @-webkit-keyframes typedjsBlink{\n          0% { opacity: 1; }\n          50% { opacity: 0.0; }\n          100% { opacity: 1; }\n        }\n      ';
-	      }
-	      if (self.fadeOut) {
-	        innerCss += '\n        .typed-fade-out{\n          opacity: 0;\n          transition: opacity .25s;\n        }\n        .typed-cursor.typed-cursor--blink.typed-fade-out{\n          -webkit-animation: 0;\n          animation: 0;\n        }\n      ';
-	      }
-	      if (css.length === 0) {
-	        return;
-	      }
-	      css.innerHTML = innerCss;
-	      document.body.appendChild(css);
-	    }
-	  }]);
-	
-	  return Initializer;
-	})();
-	
-	exports['default'] = Initializer;
-	var initializer = new Initializer();
-	exports.initializer = initializer;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-	/**
-	 * Defaults & options
-	 * @returns {object} Typed defaults & options
-	 * @public
-	 */
-	
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	var defaults = {
-	  /**
-	   * @property {array} strings strings to be typed
-	   * @property {string} stringsElement ID of element containing string children
-	   */
-	  strings: ['These are the default values...', 'You know what you should do?', 'Use your own!', 'Have a great day!'],
-	  stringsElement: null,
-	
-	  /**
-	   * @property {number} typeSpeed type speed in milliseconds
-	   */
-	  typeSpeed: 0,
-	
-	  /**
-	   * @property {number} startDelay time before typing starts in milliseconds
-	   */
-	  startDelay: 0,
-	
-	  /**
-	   * @property {number} backSpeed backspacing speed in milliseconds
-	   */
-	  backSpeed: 0,
-	
-	  /**
-	   * @property {boolean} smartBackspace only backspace what doesn't match the previous string
-	   */
-	  smartBackspace: true,
-	
-	  /**
-	   * @property {boolean} shuffle shuffle the strings
-	   */
-	  shuffle: false,
-	
-	  /**
-	   * @property {number} backDelay time before backspacing in milliseconds
-	   */
-	  backDelay: 700,
-	
-	  /**
-	   * @property {boolean} fadeOut Fade out instead of backspace
-	   * @property {string} fadeOutClass css class for fade animation
-	   * @property {boolean} fadeOutDelay Fade out delay in milliseconds
-	   */
-	  fadeOut: false,
-	  fadeOutClass: 'typed-fade-out',
-	  fadeOutDelay: 500,
-	
-	  /**
-	   * @property {boolean} loop loop strings
-	   * @property {number} loopCount amount of loops
-	   */
-	  loop: false,
-	  loopCount: Infinity,
-	
-	  /**
-	   * @property {boolean} showCursor show cursor
-	   * @property {string} cursorChar character for cursor
-	   * @property {boolean} autoInsertCss insert CSS for cursor and fadeOut into HTML <head>
-	   */
-	  showCursor: true,
-	  cursorChar: '|',
-	  autoInsertCss: true,
-	
-	  /**
-	   * @property {string} attr attribute for typing
-	   * Ex: input placeholder, value, or just HTML text
-	   */
-	  attr: null,
-	
-	  /**
-	   * @property {boolean} bindInputFocusEvents bind to focus and blur if el is text input
-	   */
-	  bindInputFocusEvents: false,
-	
-	  /**
-	   * @property {string} contentType 'html' or 'null' for plaintext
-	   */
-	  contentType: 'html',
-	
-	  /**
-	   * All typing is complete
-	   * @param {Typed} self
-	   */
-	  onComplete: function onComplete(self) {},
-	
-	  /**
-	   * Before each string is typed
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  preStringTyped: function preStringTyped(arrayPos, self) {},
-	
-	  /**
-	   * After each string is typed
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onStringTyped: function onStringTyped(arrayPos, self) {},
-	
-	  /**
-	   * During looping, after last string is typed
-	   * @param {Typed} self
-	   */
-	  onLastStringBackspaced: function onLastStringBackspaced(self) {},
-	
-	  /**
-	   * Typing has been stopped
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onTypingPaused: function onTypingPaused(arrayPos, self) {},
-	
-	  /**
-	   * Typing has been started after being stopped
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onTypingResumed: function onTypingResumed(arrayPos, self) {},
-	
-	  /**
-	   * After reset
-	   * @param {Typed} self
-	   */
-	  onReset: function onReset(self) {},
-	
-	  /**
-	   * After stop
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onStop: function onStop(arrayPos, self) {},
-	
-	  /**
-	   * After start
-	   * @param {number} arrayPos
-	   * @param {Typed} self
-	   */
-	  onStart: function onStart(arrayPos, self) {},
-	
-	  /**
-	   * After destroy
-	   * @param {Typed} self
-	   */
-	  onDestroy: function onDestroy(self) {}
-	};
-	
-	exports['default'] = defaults;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-	
-	/**
-	 * TODO: These methods can probably be combined somehow
-	 * Parse HTML tags & HTML Characters
-	 */
-	
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var HTMLParser = (function () {
-	  function HTMLParser() {
-	    _classCallCheck(this, HTMLParser);
-	  }
-	
-	  _createClass(HTMLParser, [{
-	    key: 'typeHtmlChars',
-	
-	    /**
-	     * Type HTML tags & HTML Characters
-	     * @param {string} curString Current string
-	     * @param {number} curStrPos Position in current string
-	     * @param {Typed} self instance of Typed
-	     * @returns {number} a new string position
-	     * @private
-	     */
-	
-	    value: function typeHtmlChars(curString, curStrPos, self) {
-	      if (self.contentType !== 'html') return curStrPos;
-	      var curChar = curString.substr(curStrPos).charAt(0);
-	      if (curChar === '<' || curChar === '&') {
-	        var endTag = '';
-	        if (curChar === '<') {
-	          endTag = '>';
-	        } else {
-	          endTag = ';';
-	        }
-	        while (curString.substr(curStrPos + 1).charAt(0) !== endTag) {
-	          curStrPos++;
-	          if (curStrPos + 1 > curString.length) {
-	            break;
-	          }
-	        }
-	        curStrPos++;
-	      }
-	      return curStrPos;
-	    }
-	
-	    /**
-	     * Backspace HTML tags and HTML Characters
-	     * @param {string} curString Current string
-	     * @param {number} curStrPos Position in current string
-	     * @param {Typed} self instance of Typed
-	     * @returns {number} a new string position
-	     * @private
-	     */
-	  }, {
-	    key: 'backSpaceHtmlChars',
-	    value: function backSpaceHtmlChars(curString, curStrPos, self) {
-	      if (self.contentType !== 'html') return curStrPos;
-	      var curChar = curString.substr(curStrPos).charAt(0);
-	      if (curChar === '>' || curChar === ';') {
-	        var endTag = '';
-	        if (curChar === '>') {
-	          endTag = '<';
-	        } else {
-	          endTag = '&';
-	        }
-	        while (curString.substr(curStrPos - 1).charAt(0) !== endTag) {
-	          curStrPos--;
-	          if (curStrPos < 0) {
-	            break;
-	          }
-	        }
-	        curStrPos--;
-	      }
-	      return curStrPos;
-	    }
-	  }]);
-	
-	  return HTMLParser;
-	})();
-	
-	exports['default'] = HTMLParser;
-	var htmlParser = new HTMLParser();
-	exports.htmlParser = htmlParser;
-
-/***/ })
-/******/ ])
-});
-;
 //! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -13469,6 +12343,1132 @@ Docs & License: https://fullcalendar.io/
 
 }));
 
+!function(t,s,e){"use strict";var i=function(t,s){var i=this;this.el=t,this.options={},Object.keys(r).forEach(function(t){i.options[t]=r[t]}),Object.keys(s).forEach(function(t){i.options[t]=s[t]}),this.isInput="input"===this.el.tagName.toLowerCase(),this.attr=this.options.attr,this.showCursor=!this.isInput&&this.options.showCursor,this.elContent=this.attr?this.el.getAttribute(this.attr):this.el.textContent,this.contentType=this.options.contentType,this.typeSpeed=this.options.typeSpeed,this.startDelay=this.options.startDelay,this.backSpeed=this.options.backSpeed,this.backDelay=this.options.backDelay,e&&this.options.stringsElement instanceof e?this.stringsElement=this.options.stringsElement[0]:this.stringsElement=this.options.stringsElement,this.strings=this.options.strings,this.strPos=0,this.arrayPos=0,this.stopNum=0,this.loop=this.options.loop,this.loopCount=this.options.loopCount,this.curLoop=0,this.stop=!1,this.cursorChar=this.options.cursorChar,this.shuffle=this.options.shuffle,this.sequence=[],this.build()};i.prototype={constructor:i,init:function(){var t=this;t.timeout=setTimeout(function(){for(var s=0;s<t.strings.length;++s)t.sequence[s]=s;t.shuffle&&(t.sequence=t.shuffleArray(t.sequence)),t.typewrite(t.strings[t.sequence[t.arrayPos]],t.strPos)},t.startDelay)},build:function(){var t=this;if(this.showCursor===!0&&(this.cursor=s.createElement("span"),this.cursor.className="typed-cursor",this.cursor.innerHTML=this.cursorChar,this.el.parentNode&&this.el.parentNode.insertBefore(this.cursor,this.el.nextSibling)),this.stringsElement){this.strings=[],this.stringsElement.style.display="none";var e=Array.prototype.slice.apply(this.stringsElement.children);e.forEach(function(s){t.strings.push(s.innerHTML)})}this.init()},typewrite:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.typeSpeed,i=this;i.timeout=setTimeout(function(){var e=0,r=t.substr(s);if("^"===r.charAt(0)){var o=1;/^\^\d+/.test(r)&&(r=/\d+/.exec(r)[0],o+=r.length,e=parseInt(r)),t=t.substring(0,s)+t.substring(s+o)}if("html"===i.contentType){var n=t.substr(s).charAt(0);if("<"===n||"&"===n){var a="",h="";for(h="<"===n?">":";";t.substr(s+1).charAt(0)!==h&&(a+=t.substr(s).charAt(0),s++,!(s+1>t.length)););s++,a+=h}}i.timeout=setTimeout(function(){if(s===t.length){if(i.options.onStringTyped(i.arrayPos),i.arrayPos===i.strings.length-1&&(i.options.callback(),i.curLoop++,i.loop===!1||i.curLoop===i.loopCount))return;i.timeout=setTimeout(function(){i.backspace(t,s)},i.backDelay)}else{0===s&&i.options.preStringTyped(i.arrayPos);var e=t.substr(0,s+1);i.attr?i.el.setAttribute(i.attr,e):i.isInput?i.el.value=e:"html"===i.contentType?i.el.innerHTML=e:i.el.textContent=e,s++,i.typewrite(t,s)}},e)},e)}},backspace:function(t,s){if(this.stop!==!0){var e=Math.round(70*Math.random())+this.backSpeed,i=this;i.timeout=setTimeout(function(){if("html"===i.contentType&&">"===t.substr(s).charAt(0)){for(var e="";"<"!==t.substr(s-1).charAt(0)&&(e-=t.substr(s).charAt(0),s--,!(s<0)););s--,e+="<"}var r=t.substr(0,s);i.attr?i.el.setAttribute(i.attr,r):i.isInput?i.el.value=r:"html"===i.contentType?i.el.innerHTML=r:i.el.textContent=r,s>i.stopNum?(s--,i.backspace(t,s)):s<=i.stopNum&&(i.arrayPos++,i.arrayPos===i.strings.length?(i.arrayPos=0,i.shuffle&&(i.sequence=i.shuffleArray(i.sequence)),i.init()):i.typewrite(i.strings[i.sequence[i.arrayPos]],s))},e)}},shuffleArray:function(t){var s,e,i=t.length;if(i)for(;--i;)e=Math.floor(Math.random()*(i+1)),s=t[e],t[e]=t[i],t[i]=s;return t},reset:function(){var t=this;clearInterval(t.timeout);this.el.getAttribute("id");this.el.textContent="","undefined"!=typeof this.cursor&&"undefined"!=typeof this.cursor.parentNode&&this.cursor.parentNode.removeChild(this.cursor),this.strPos=0,this.arrayPos=0,this.curLoop=0,this.options.resetCallback()}},i["new"]=function(t,e){var r=Array.prototype.slice.apply(s.querySelectorAll(t));r.forEach(function(t){var s=t._typed,r="object"==typeof e&&e;s&&s.reset(),t._typed=s=new i(t,r),"string"==typeof e&&s[e]()})},e&&(e.fn.typed=function(t){return this.each(function(){var s=e(this),r=s.data("typed"),o="object"==typeof t&&t;r&&r.reset(),s.data("typed",r=new i(this,o)),"string"==typeof t&&r[t]()})}),t.Typed=i;var r={strings:["These are the default values...","You know what you should do?","Use your own!","Have a great day!"],stringsElement:null,typeSpeed:0,startDelay:0,backSpeed:0,shuffle:!1,backDelay:500,loop:!1,loopCount:!1,showCursor:!0,cursorChar:"|",attr:null,contentType:"html",callback:function(){},preStringTyped:function(){},onStringTyped:function(){},resetCallback:function(){}}}(window,document,window.jQuery);
+!function(a){"use strict";function b(b,c){this.element=a(b),this.settings=a.extend({},d,c),this._defaults=d,this._init()}var c="Morphext",d={animation:"bounceIn",separator:",",speed:2e3,complete:a.noop};b.prototype={_init:function(){var b=this;this.phrases=[],this.element.addClass("morphext"),a.each(this.element.text().split(this.settings.separator),function(c,d){b.phrases.push(a.trim(d))}),this.index=-1,this.animate(),this.start()},animate:function(){this.index=++this.index%this.phrases.length,this.element[0].innerHTML='<span class="animated '+this.settings.animation+'">'+this.phrases[this.index]+"</span>",a.isFunction(this.settings.complete)&&this.settings.complete.call(this)},start:function(){var a=this;this._interval=setInterval(function(){a.animate()},this.settings.speed)},stop:function(){this._interval=clearInterval(this._interval)}},a.fn[c]=function(d){return this.each(function(){a.data(this,"plugin_"+c)||a.data(this,"plugin_"+c,new b(this,d))})}}(jQuery);
+
+/*!
+ * Morphext - Text Rotating Plugin for jQuery
+ * https://github.com/MrSaints/Morphext
+ *
+ * Built on jQuery Boilerplate
+ * http://jqueryboilerplate.com/
+ *
+ * Copyright 2014 Ian Lai and other contributors
+ * Released under the MIT license
+ * http://ian.mit-license.org/
+ */
+
+/*eslint-env browser */
+/*global jQuery:false */
+/*eslint-disable no-underscore-dangle */
+
+(function ($) {
+    "use strict";
+
+    var pluginName = "Morphext",
+        defaults = {
+            animation: "bounceIn",
+            separator: ",",
+            speed: 2000,
+            complete: $.noop
+        };
+
+    function Plugin (element, options) {
+        this.element = $(element);
+
+        this.settings = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._init();
+    }
+
+    Plugin.prototype = {
+        _init: function () {
+            var $that = this;
+            this.phrases = [];
+
+            this.element.addClass("morphext");
+
+            $.each(this.element.text().split(this.settings.separator), function (key, value) {
+                $that.phrases.push($.trim(value));
+            });
+
+            this.index = -1;
+            this.animate();
+            this.start();
+        },
+        animate: function () {
+            this.index = ++this.index % this.phrases.length;
+            this.element[0].innerHTML = "<span class=\"animated " + this.settings.animation + "\">" + this.phrases[this.index] + "</span>";
+
+            if ($.isFunction(this.settings.complete)) {
+                this.settings.complete.call(this);
+            }
+        },
+        start: function () {
+            var $that = this;
+            this._interval = setInterval(function () {
+                $that.animate();
+            }, this.settings.speed);
+        },
+        stop: function () {
+            this._interval = clearInterval(this._interval);
+        }
+    };
+
+    $.fn[pluginName] = function (options) {
+        return this.each(function() {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+            }
+        });
+    };
+})(jQuery);
+
+/*!
+ * 
+ *   typed.js - A JavaScript Typing Animation Library
+ *   Author: Matt Boldt <me@mattboldt.com>
+ *   Version: v2.0.9
+ *   Url: https://github.com/mattboldt/typed.js
+ *   License(s): MIT
+ * 
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["Typed"] = factory();
+	else
+		root["Typed"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _initializerJs = __webpack_require__(1);
+	
+	var _htmlParserJs = __webpack_require__(3);
+	
+	/**
+	 * Welcome to Typed.js!
+	 * @param {string} elementId HTML element ID _OR_ HTML element
+	 * @param {object} options options object
+	 * @returns {object} a new Typed object
+	 */
+	
+	var Typed = (function () {
+	  function Typed(elementId, options) {
+	    _classCallCheck(this, Typed);
+	
+	    // Initialize it up
+	    _initializerJs.initializer.load(this, options, elementId);
+	    // All systems go!
+	    this.begin();
+	  }
+	
+	  /**
+	   * Toggle start() and stop() of the Typed instance
+	   * @public
+	   */
+	
+	  _createClass(Typed, [{
+	    key: 'toggle',
+	    value: function toggle() {
+	      this.pause.status ? this.start() : this.stop();
+	    }
+	
+	    /**
+	     * Stop typing / backspacing and enable cursor blinking
+	     * @public
+	     */
+	  }, {
+	    key: 'stop',
+	    value: function stop() {
+	      if (this.typingComplete) return;
+	      if (this.pause.status) return;
+	      this.toggleBlinking(true);
+	      this.pause.status = true;
+	      this.options.onStop(this.arrayPos, this);
+	    }
+	
+	    /**
+	     * Start typing / backspacing after being stopped
+	     * @public
+	     */
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      if (this.typingComplete) return;
+	      if (!this.pause.status) return;
+	      this.pause.status = false;
+	      if (this.pause.typewrite) {
+	        this.typewrite(this.pause.curString, this.pause.curStrPos);
+	      } else {
+	        this.backspace(this.pause.curString, this.pause.curStrPos);
+	      }
+	      this.options.onStart(this.arrayPos, this);
+	    }
+	
+	    /**
+	     * Destroy this instance of Typed
+	     * @public
+	     */
+	  }, {
+	    key: 'destroy',
+	    value: function destroy() {
+	      this.reset(false);
+	      this.options.onDestroy(this);
+	    }
+	
+	    /**
+	     * Reset Typed and optionally restarts
+	     * @param {boolean} restart
+	     * @public
+	     */
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      var restart = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+	
+	      clearInterval(this.timeout);
+	      this.replaceText('');
+	      if (this.cursor && this.cursor.parentNode) {
+	        this.cursor.parentNode.removeChild(this.cursor);
+	        this.cursor = null;
+	      }
+	      this.strPos = 0;
+	      this.arrayPos = 0;
+	      this.curLoop = 0;
+	      if (restart) {
+	        this.insertCursor();
+	        this.options.onReset(this);
+	        this.begin();
+	      }
+	    }
+	
+	    /**
+	     * Begins the typing animation
+	     * @private
+	     */
+	  }, {
+	    key: 'begin',
+	    value: function begin() {
+	      var _this = this;
+	
+	      this.typingComplete = false;
+	      this.shuffleStringsIfNeeded(this);
+	      this.insertCursor();
+	      if (this.bindInputFocusEvents) this.bindFocusEvents();
+	      this.timeout = setTimeout(function () {
+	        // Check if there is some text in the element, if yes start by backspacing the default message
+	        if (!_this.currentElContent || _this.currentElContent.length === 0) {
+	          _this.typewrite(_this.strings[_this.sequence[_this.arrayPos]], _this.strPos);
+	        } else {
+	          // Start typing
+	          _this.backspace(_this.currentElContent, _this.currentElContent.length);
+	        }
+	      }, this.startDelay);
+	    }
+	
+	    /**
+	     * Called for each character typed
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'typewrite',
+	    value: function typewrite(curString, curStrPos) {
+	      var _this2 = this;
+	
+	      if (this.fadeOut && this.el.classList.contains(this.fadeOutClass)) {
+	        this.el.classList.remove(this.fadeOutClass);
+	        if (this.cursor) this.cursor.classList.remove(this.fadeOutClass);
+	      }
+	
+	      var humanize = this.humanizer(this.typeSpeed);
+	      var numChars = 1;
+	
+	      if (this.pause.status === true) {
+	        this.setPauseStatus(curString, curStrPos, true);
+	        return;
+	      }
+	
+	      // contain typing function in a timeout humanize'd delay
+	      this.timeout = setTimeout(function () {
+	        // skip over any HTML chars
+	        curStrPos = _htmlParserJs.htmlParser.typeHtmlChars(curString, curStrPos, _this2);
+	
+	        var pauseTime = 0;
+	        var substr = curString.substr(curStrPos);
+	        // check for an escape character before a pause value
+	        // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
+	        // single ^ are removed from string
+	        if (substr.charAt(0) === '^') {
+	          if (/^\^\d+/.test(substr)) {
+	            var skip = 1; // skip at least 1
+	            substr = /\d+/.exec(substr)[0];
+	            skip += substr.length;
+	            pauseTime = parseInt(substr);
+	            _this2.temporaryPause = true;
+	            _this2.options.onTypingPaused(_this2.arrayPos, _this2);
+	            // strip out the escape character and pause value so they're not printed
+	            curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
+	            _this2.toggleBlinking(true);
+	          }
+	        }
+	
+	        // check for skip characters formatted as
+	        // "this is a `string to print NOW` ..."
+	        if (substr.charAt(0) === '`') {
+	          while (curString.substr(curStrPos + numChars).charAt(0) !== '`') {
+	            numChars++;
+	            if (curStrPos + numChars > curString.length) break;
+	          }
+	          // strip out the escape characters and append all the string in between
+	          var stringBeforeSkip = curString.substring(0, curStrPos);
+	          var stringSkipped = curString.substring(stringBeforeSkip.length + 1, curStrPos + numChars);
+	          var stringAfterSkip = curString.substring(curStrPos + numChars + 1);
+	          curString = stringBeforeSkip + stringSkipped + stringAfterSkip;
+	          numChars--;
+	        }
+	
+	        // timeout for any pause after a character
+	        _this2.timeout = setTimeout(function () {
+	          // Accounts for blinking while paused
+	          _this2.toggleBlinking(false);
+	
+	          // We're done with this sentence!
+	          if (curStrPos >= curString.length) {
+	            _this2.doneTyping(curString, curStrPos);
+	          } else {
+	            _this2.keepTyping(curString, curStrPos, numChars);
+	          }
+	          // end of character pause
+	          if (_this2.temporaryPause) {
+	            _this2.temporaryPause = false;
+	            _this2.options.onTypingResumed(_this2.arrayPos, _this2);
+	          }
+	        }, pauseTime);
+	
+	        // humanized value for typing
+	      }, humanize);
+	    }
+	
+	    /**
+	     * Continue to the next string & begin typing
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'keepTyping',
+	    value: function keepTyping(curString, curStrPos, numChars) {
+	      // call before functions if applicable
+	      if (curStrPos === 0) {
+	        this.toggleBlinking(false);
+	        this.options.preStringTyped(this.arrayPos, this);
+	      }
+	      // start typing each new char into existing string
+	      // curString: arg, this.el.html: original text inside element
+	      curStrPos += numChars;
+	      var nextString = curString.substr(0, curStrPos);
+	      this.replaceText(nextString);
+	      // loop the function
+	      this.typewrite(curString, curStrPos);
+	    }
+	
+	    /**
+	     * We're done typing all strings
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'doneTyping',
+	    value: function doneTyping(curString, curStrPos) {
+	      var _this3 = this;
+	
+	      // fires callback function
+	      this.options.onStringTyped(this.arrayPos, this);
+	      this.toggleBlinking(true);
+	      // is this the final string
+	      if (this.arrayPos === this.strings.length - 1) {
+	        // callback that occurs on the last typed string
+	        this.complete();
+	        // quit if we wont loop back
+	        if (this.loop === false || this.curLoop === this.loopCount) {
+	          return;
+	        }
+	      }
+	      this.timeout = setTimeout(function () {
+	        _this3.backspace(curString, curStrPos);
+	      }, this.backDelay);
+	    }
+	
+	    /**
+	     * Backspaces 1 character at a time
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'backspace',
+	    value: function backspace(curString, curStrPos) {
+	      var _this4 = this;
+	
+	      if (this.pause.status === true) {
+	        this.setPauseStatus(curString, curStrPos, true);
+	        return;
+	      }
+	      if (this.fadeOut) return this.initFadeOut();
+	
+	      this.toggleBlinking(false);
+	      var humanize = this.humanizer(this.backSpeed);
+	
+	      this.timeout = setTimeout(function () {
+	        curStrPos = _htmlParserJs.htmlParser.backSpaceHtmlChars(curString, curStrPos, _this4);
+	        // replace text with base text + typed characters
+	        var curStringAtPosition = curString.substr(0, curStrPos);
+	        _this4.replaceText(curStringAtPosition);
+	
+	        // if smartBack is enabled
+	        if (_this4.smartBackspace) {
+	          // the remaining part of the current string is equal of the same part of the new string
+	          var nextString = _this4.strings[_this4.arrayPos + 1];
+	          if (nextString && curStringAtPosition === nextString.substr(0, curStrPos)) {
+	            _this4.stopNum = curStrPos;
+	          } else {
+	            _this4.stopNum = 0;
+	          }
+	        }
+	
+	        // if the number (id of character in current string) is
+	        // less than the stop number, keep going
+	        if (curStrPos > _this4.stopNum) {
+	          // subtract characters one by one
+	          curStrPos--;
+	          // loop the function
+	          _this4.backspace(curString, curStrPos);
+	        } else if (curStrPos <= _this4.stopNum) {
+	          // if the stop number has been reached, increase
+	          // array position to next string
+	          _this4.arrayPos++;
+	          // When looping, begin at the beginning after backspace complete
+	          if (_this4.arrayPos === _this4.strings.length) {
+	            _this4.arrayPos = 0;
+	            _this4.options.onLastStringBackspaced();
+	            _this4.shuffleStringsIfNeeded();
+	            _this4.begin();
+	          } else {
+	            _this4.typewrite(_this4.strings[_this4.sequence[_this4.arrayPos]], curStrPos);
+	          }
+	        }
+	        // humanized value for typing
+	      }, humanize);
+	    }
+	
+	    /**
+	     * Full animation is complete
+	     * @private
+	     */
+	  }, {
+	    key: 'complete',
+	    value: function complete() {
+	      this.options.onComplete(this);
+	      if (this.loop) {
+	        this.curLoop++;
+	      } else {
+	        this.typingComplete = true;
+	      }
+	    }
+	
+	    /**
+	     * Has the typing been stopped
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @param {boolean} isTyping
+	     * @private
+	     */
+	  }, {
+	    key: 'setPauseStatus',
+	    value: function setPauseStatus(curString, curStrPos, isTyping) {
+	      this.pause.typewrite = isTyping;
+	      this.pause.curString = curString;
+	      this.pause.curStrPos = curStrPos;
+	    }
+	
+	    /**
+	     * Toggle the blinking cursor
+	     * @param {boolean} isBlinking
+	     * @private
+	     */
+	  }, {
+	    key: 'toggleBlinking',
+	    value: function toggleBlinking(isBlinking) {
+	      if (!this.cursor) return;
+	      // if in paused state, don't toggle blinking a 2nd time
+	      if (this.pause.status) return;
+	      if (this.cursorBlinking === isBlinking) return;
+	      this.cursorBlinking = isBlinking;
+	      if (isBlinking) {
+	        this.cursor.classList.add('typed-cursor--blink');
+	      } else {
+	        this.cursor.classList.remove('typed-cursor--blink');
+	      }
+	    }
+	
+	    /**
+	     * Speed in MS to type
+	     * @param {number} speed
+	     * @private
+	     */
+	  }, {
+	    key: 'humanizer',
+	    value: function humanizer(speed) {
+	      return Math.round(Math.random() * speed / 2) + speed;
+	    }
+	
+	    /**
+	     * Shuffle the sequence of the strings array
+	     * @private
+	     */
+	  }, {
+	    key: 'shuffleStringsIfNeeded',
+	    value: function shuffleStringsIfNeeded() {
+	      if (!this.shuffle) return;
+	      this.sequence = this.sequence.sort(function () {
+	        return Math.random() - 0.5;
+	      });
+	    }
+	
+	    /**
+	     * Adds a CSS class to fade out current string
+	     * @private
+	     */
+	  }, {
+	    key: 'initFadeOut',
+	    value: function initFadeOut() {
+	      var _this5 = this;
+	
+	      this.el.className += ' ' + this.fadeOutClass;
+	      if (this.cursor) this.cursor.className += ' ' + this.fadeOutClass;
+	      return setTimeout(function () {
+	        _this5.arrayPos++;
+	        _this5.replaceText('');
+	
+	        // Resets current string if end of loop reached
+	        if (_this5.strings.length > _this5.arrayPos) {
+	          _this5.typewrite(_this5.strings[_this5.sequence[_this5.arrayPos]], 0);
+	        } else {
+	          _this5.typewrite(_this5.strings[0], 0);
+	          _this5.arrayPos = 0;
+	        }
+	      }, this.fadeOutDelay);
+	    }
+	
+	    /**
+	     * Replaces current text in the HTML element
+	     * depending on element type
+	     * @param {string} str
+	     * @private
+	     */
+	  }, {
+	    key: 'replaceText',
+	    value: function replaceText(str) {
+	      if (this.attr) {
+	        this.el.setAttribute(this.attr, str);
+	      } else {
+	        if (this.isInput) {
+	          this.el.value = str;
+	        } else if (this.contentType === 'html') {
+	          this.el.innerHTML = str;
+	        } else {
+	          this.el.textContent = str;
+	        }
+	      }
+	    }
+	
+	    /**
+	     * If using input elements, bind focus in order to
+	     * start and stop the animation
+	     * @private
+	     */
+	  }, {
+	    key: 'bindFocusEvents',
+	    value: function bindFocusEvents() {
+	      var _this6 = this;
+	
+	      if (!this.isInput) return;
+	      this.el.addEventListener('focus', function (e) {
+	        _this6.stop();
+	      });
+	      this.el.addEventListener('blur', function (e) {
+	        if (_this6.el.value && _this6.el.value.length !== 0) {
+	          return;
+	        }
+	        _this6.start();
+	      });
+	    }
+	
+	    /**
+	     * On init, insert the cursor element
+	     * @private
+	     */
+	  }, {
+	    key: 'insertCursor',
+	    value: function insertCursor() {
+	      if (!this.showCursor) return;
+	      if (this.cursor) return;
+	      this.cursor = document.createElement('span');
+	      this.cursor.className = 'typed-cursor';
+	      this.cursor.innerHTML = this.cursorChar;
+	      this.el.parentNode && this.el.parentNode.insertBefore(this.cursor, this.el.nextSibling);
+	    }
+	  }]);
+	
+	  return Typed;
+	})();
+	
+	exports['default'] = Typed;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _defaultsJs = __webpack_require__(2);
+	
+	var _defaultsJs2 = _interopRequireDefault(_defaultsJs);
+	
+	/**
+	 * Initialize the Typed object
+	 */
+	
+	var Initializer = (function () {
+	  function Initializer() {
+	    _classCallCheck(this, Initializer);
+	  }
+	
+	  _createClass(Initializer, [{
+	    key: 'load',
+	
+	    /**
+	     * Load up defaults & options on the Typed instance
+	     * @param {Typed} self instance of Typed
+	     * @param {object} options options object
+	     * @param {string} elementId HTML element ID _OR_ instance of HTML element
+	     * @private
+	     */
+	
+	    value: function load(self, options, elementId) {
+	      // chosen element to manipulate text
+	      if (typeof elementId === 'string') {
+	        self.el = document.querySelector(elementId);
+	      } else {
+	        self.el = elementId;
+	      }
+	
+	      self.options = _extends({}, _defaultsJs2['default'], options);
+	
+	      // attribute to type into
+	      self.isInput = self.el.tagName.toLowerCase() === 'input';
+	      self.attr = self.options.attr;
+	      self.bindInputFocusEvents = self.options.bindInputFocusEvents;
+	
+	      // show cursor
+	      self.showCursor = self.isInput ? false : self.options.showCursor;
+	
+	      // custom cursor
+	      self.cursorChar = self.options.cursorChar;
+	
+	      // Is the cursor blinking
+	      self.cursorBlinking = true;
+	
+	      // text content of element
+	      self.elContent = self.attr ? self.el.getAttribute(self.attr) : self.el.textContent;
+	
+	      // html or plain text
+	      self.contentType = self.options.contentType;
+	
+	      // typing speed
+	      self.typeSpeed = self.options.typeSpeed;
+	
+	      // add a delay before typing starts
+	      self.startDelay = self.options.startDelay;
+	
+	      // backspacing speed
+	      self.backSpeed = self.options.backSpeed;
+	
+	      // only backspace what doesn't match the previous string
+	      self.smartBackspace = self.options.smartBackspace;
+	
+	      // amount of time to wait before backspacing
+	      self.backDelay = self.options.backDelay;
+	
+	      // Fade out instead of backspace
+	      self.fadeOut = self.options.fadeOut;
+	      self.fadeOutClass = self.options.fadeOutClass;
+	      self.fadeOutDelay = self.options.fadeOutDelay;
+	
+	      // variable to check whether typing is currently paused
+	      self.isPaused = false;
+	
+	      // input strings of text
+	      self.strings = self.options.strings.map(function (s) {
+	        return s.trim();
+	      });
+	
+	      // div containing strings
+	      if (typeof self.options.stringsElement === 'string') {
+	        self.stringsElement = document.querySelector(self.options.stringsElement);
+	      } else {
+	        self.stringsElement = self.options.stringsElement;
+	      }
+	
+	      if (self.stringsElement) {
+	        self.strings = [];
+	        self.stringsElement.style.display = 'none';
+	        var strings = Array.prototype.slice.apply(self.stringsElement.children);
+	        var stringsLength = strings.length;
+	
+	        if (stringsLength) {
+	          for (var i = 0; i < stringsLength; i += 1) {
+	            var stringEl = strings[i];
+	            self.strings.push(stringEl.innerHTML.trim());
+	          }
+	        }
+	      }
+	
+	      // character number position of current string
+	      self.strPos = 0;
+	
+	      // current array position
+	      self.arrayPos = 0;
+	
+	      // index of string to stop backspacing on
+	      self.stopNum = 0;
+	
+	      // Looping logic
+	      self.loop = self.options.loop;
+	      self.loopCount = self.options.loopCount;
+	      self.curLoop = 0;
+	
+	      // shuffle the strings
+	      self.shuffle = self.options.shuffle;
+	      // the order of strings
+	      self.sequence = [];
+	
+	      self.pause = {
+	        status: false,
+	        typewrite: true,
+	        curString: '',
+	        curStrPos: 0
+	      };
+	
+	      // When the typing is complete (when not looped)
+	      self.typingComplete = false;
+	
+	      // Set the order in which the strings are typed
+	      for (var i in self.strings) {
+	        self.sequence[i] = i;
+	      }
+	
+	      // If there is some text in the element
+	      self.currentElContent = this.getCurrentElContent(self);
+	
+	      self.autoInsertCss = self.options.autoInsertCss;
+	
+	      this.appendAnimationCss(self);
+	    }
+	  }, {
+	    key: 'getCurrentElContent',
+	    value: function getCurrentElContent(self) {
+	      var elContent = '';
+	      if (self.attr) {
+	        elContent = self.el.getAttribute(self.attr);
+	      } else if (self.isInput) {
+	        elContent = self.el.value;
+	      } else if (self.contentType === 'html') {
+	        elContent = self.el.innerHTML;
+	      } else {
+	        elContent = self.el.textContent;
+	      }
+	      return elContent;
+	    }
+	  }, {
+	    key: 'appendAnimationCss',
+	    value: function appendAnimationCss(self) {
+	      var cssDataName = 'data-typed-js-css';
+	      if (!self.autoInsertCss) {
+	        return;
+	      }
+	      if (!self.showCursor && !self.fadeOut) {
+	        return;
+	      }
+	      if (document.querySelector('[' + cssDataName + ']')) {
+	        return;
+	      }
+	
+	      var css = document.createElement('style');
+	      css.type = 'text/css';
+	      css.setAttribute(cssDataName, true);
+	
+	      var innerCss = '';
+	      if (self.showCursor) {
+	        innerCss += '\n        .typed-cursor{\n          opacity: 1;\n        }\n        .typed-cursor.typed-cursor--blink{\n          animation: typedjsBlink 0.7s infinite;\n          -webkit-animation: typedjsBlink 0.7s infinite;\n                  animation: typedjsBlink 0.7s infinite;\n        }\n        @keyframes typedjsBlink{\n          50% { opacity: 0.0; }\n        }\n        @-webkit-keyframes typedjsBlink{\n          0% { opacity: 1; }\n          50% { opacity: 0.0; }\n          100% { opacity: 1; }\n        }\n      ';
+	      }
+	      if (self.fadeOut) {
+	        innerCss += '\n        .typed-fade-out{\n          opacity: 0;\n          transition: opacity .25s;\n        }\n        .typed-cursor.typed-cursor--blink.typed-fade-out{\n          -webkit-animation: 0;\n          animation: 0;\n        }\n      ';
+	      }
+	      if (css.length === 0) {
+	        return;
+	      }
+	      css.innerHTML = innerCss;
+	      document.body.appendChild(css);
+	    }
+	  }]);
+	
+	  return Initializer;
+	})();
+	
+	exports['default'] = Initializer;
+	var initializer = new Initializer();
+	exports.initializer = initializer;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Defaults & options
+	 * @returns {object} Typed defaults & options
+	 * @public
+	 */
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var defaults = {
+	  /**
+	   * @property {array} strings strings to be typed
+	   * @property {string} stringsElement ID of element containing string children
+	   */
+	  strings: ['These are the default values...', 'You know what you should do?', 'Use your own!', 'Have a great day!'],
+	  stringsElement: null,
+	
+	  /**
+	   * @property {number} typeSpeed type speed in milliseconds
+	   */
+	  typeSpeed: 0,
+	
+	  /**
+	   * @property {number} startDelay time before typing starts in milliseconds
+	   */
+	  startDelay: 0,
+	
+	  /**
+	   * @property {number} backSpeed backspacing speed in milliseconds
+	   */
+	  backSpeed: 0,
+	
+	  /**
+	   * @property {boolean} smartBackspace only backspace what doesn't match the previous string
+	   */
+	  smartBackspace: true,
+	
+	  /**
+	   * @property {boolean} shuffle shuffle the strings
+	   */
+	  shuffle: false,
+	
+	  /**
+	   * @property {number} backDelay time before backspacing in milliseconds
+	   */
+	  backDelay: 700,
+	
+	  /**
+	   * @property {boolean} fadeOut Fade out instead of backspace
+	   * @property {string} fadeOutClass css class for fade animation
+	   * @property {boolean} fadeOutDelay Fade out delay in milliseconds
+	   */
+	  fadeOut: false,
+	  fadeOutClass: 'typed-fade-out',
+	  fadeOutDelay: 500,
+	
+	  /**
+	   * @property {boolean} loop loop strings
+	   * @property {number} loopCount amount of loops
+	   */
+	  loop: false,
+	  loopCount: Infinity,
+	
+	  /**
+	   * @property {boolean} showCursor show cursor
+	   * @property {string} cursorChar character for cursor
+	   * @property {boolean} autoInsertCss insert CSS for cursor and fadeOut into HTML <head>
+	   */
+	  showCursor: true,
+	  cursorChar: '|',
+	  autoInsertCss: true,
+	
+	  /**
+	   * @property {string} attr attribute for typing
+	   * Ex: input placeholder, value, or just HTML text
+	   */
+	  attr: null,
+	
+	  /**
+	   * @property {boolean} bindInputFocusEvents bind to focus and blur if el is text input
+	   */
+	  bindInputFocusEvents: false,
+	
+	  /**
+	   * @property {string} contentType 'html' or 'null' for plaintext
+	   */
+	  contentType: 'html',
+	
+	  /**
+	   * All typing is complete
+	   * @param {Typed} self
+	   */
+	  onComplete: function onComplete(self) {},
+	
+	  /**
+	   * Before each string is typed
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  preStringTyped: function preStringTyped(arrayPos, self) {},
+	
+	  /**
+	   * After each string is typed
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStringTyped: function onStringTyped(arrayPos, self) {},
+	
+	  /**
+	   * During looping, after last string is typed
+	   * @param {Typed} self
+	   */
+	  onLastStringBackspaced: function onLastStringBackspaced(self) {},
+	
+	  /**
+	   * Typing has been stopped
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onTypingPaused: function onTypingPaused(arrayPos, self) {},
+	
+	  /**
+	   * Typing has been started after being stopped
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onTypingResumed: function onTypingResumed(arrayPos, self) {},
+	
+	  /**
+	   * After reset
+	   * @param {Typed} self
+	   */
+	  onReset: function onReset(self) {},
+	
+	  /**
+	   * After stop
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStop: function onStop(arrayPos, self) {},
+	
+	  /**
+	   * After start
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStart: function onStart(arrayPos, self) {},
+	
+	  /**
+	   * After destroy
+	   * @param {Typed} self
+	   */
+	  onDestroy: function onDestroy(self) {}
+	};
+	
+	exports['default'] = defaults;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+	
+	/**
+	 * TODO: These methods can probably be combined somehow
+	 * Parse HTML tags & HTML Characters
+	 */
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var HTMLParser = (function () {
+	  function HTMLParser() {
+	    _classCallCheck(this, HTMLParser);
+	  }
+	
+	  _createClass(HTMLParser, [{
+	    key: 'typeHtmlChars',
+	
+	    /**
+	     * Type HTML tags & HTML Characters
+	     * @param {string} curString Current string
+	     * @param {number} curStrPos Position in current string
+	     * @param {Typed} self instance of Typed
+	     * @returns {number} a new string position
+	     * @private
+	     */
+	
+	    value: function typeHtmlChars(curString, curStrPos, self) {
+	      if (self.contentType !== 'html') return curStrPos;
+	      var curChar = curString.substr(curStrPos).charAt(0);
+	      if (curChar === '<' || curChar === '&') {
+	        var endTag = '';
+	        if (curChar === '<') {
+	          endTag = '>';
+	        } else {
+	          endTag = ';';
+	        }
+	        while (curString.substr(curStrPos + 1).charAt(0) !== endTag) {
+	          curStrPos++;
+	          if (curStrPos + 1 > curString.length) {
+	            break;
+	          }
+	        }
+	        curStrPos++;
+	      }
+	      return curStrPos;
+	    }
+	
+	    /**
+	     * Backspace HTML tags and HTML Characters
+	     * @param {string} curString Current string
+	     * @param {number} curStrPos Position in current string
+	     * @param {Typed} self instance of Typed
+	     * @returns {number} a new string position
+	     * @private
+	     */
+	  }, {
+	    key: 'backSpaceHtmlChars',
+	    value: function backSpaceHtmlChars(curString, curStrPos, self) {
+	      if (self.contentType !== 'html') return curStrPos;
+	      var curChar = curString.substr(curStrPos).charAt(0);
+	      if (curChar === '>' || curChar === ';') {
+	        var endTag = '';
+	        if (curChar === '>') {
+	          endTag = '<';
+	        } else {
+	          endTag = '&';
+	        }
+	        while (curString.substr(curStrPos - 1).charAt(0) !== endTag) {
+	          curStrPos--;
+	          if (curStrPos < 0) {
+	            break;
+	          }
+	        }
+	        curStrPos--;
+	      }
+	      return curStrPos;
+	    }
+	  }]);
+	
+	  return HTMLParser;
+	})();
+	
+	exports['default'] = HTMLParser;
+	var htmlParser = new HTMLParser();
+	exports.htmlParser = htmlParser;
+
+/***/ })
+/******/ ])
+});
+;
 /*!
  * imagesLoaded PACKAGED v4.1.4
  * JavaScript is all like "You images are done yet or what?"
@@ -17673,54 +17673,6 @@ var trim = String.prototype.trim ?
 }));
 
 
-(function($) {
-	$.fn.eaelProgressBar = function() {
-		var $this = $(this)
-		var $layout = $this.data('layout')
-		var $num = $this.data('count')
-		var $duration = $this.data('duration')
-
-		$this.one('inview', function() {
-			if ($layout == 'line') {
-				$('.eael-progressbar-line-fill', $this).css({
-					'width': $num + '%',
-				})
-			} else if ($layout == 'half_circle') {
-				$('.eael-progressbar-circle-half', $this).css({
-					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
-				})
-			}
-
-			$('.eael-progressbar-count', $this).prop({
-				'counter': 0
-			}).animate({
-				counter: $num
-			}, {
-				duration: $duration,
-				easing: 'linear',
-				step: function(counter) {
-					if ($layout == 'circle') {
-						var rotate = (counter * 3.6)
-						$('.eael-progressbar-circle-half-left', $this).css({
-							'transform': "rotate(" + rotate + "deg)",
-						})
-						if (rotate > 180) {
-							$('.eael-progressbar-circle-pie', $this).css({
-								'-webkit-clip-path': 'inset(0)',
-								'clip-path': 'inset(0)',
-							})
-							$('.eael-progressbar-circle-half-right', $this).css({
-								'visibility': 'visible'
-							})
-						}
-					}
-
-					$(this).text(Math.ceil(counter))
-				}
-			})
-		})
-	}
-}(jQuery));
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2016 Dmitry Semenov; */
@@ -19582,6 +19534,58 @@ var trim = String.prototype.trim ?
     /*>>retina*/
     _checkInstance();
 }));
+(function($) {
+	$.fn.eaelProgressBar = function() {
+		var $this = $(this)
+		var $layout = $this.data('layout')
+		var $num = $this.data('count')
+		var $duration = $this.data('duration')
+
+		if($num > 100) {
+			$num = 100;
+		}
+
+		$this.one('inview', function() {
+			if ($layout == 'line') {
+				$('.eael-progressbar-line-fill', $this).css({
+					'width': $num + '%',
+				})
+			} else if ($layout == 'half_circle') {
+				$('.eael-progressbar-circle-half', $this).css({
+					'transform': 'rotate(' + ($num * 1.8) + 'deg)',
+				})
+			}
+
+			$('.eael-progressbar-count', $this).prop({
+				'counter': 0
+			}).animate({
+				counter: $num
+			}, {
+				duration: $duration,
+				easing: 'linear',
+				step: function(counter) {
+					if ($layout == 'circle') {
+						var rotate = (counter * 3.6)
+						$('.eael-progressbar-circle-half-left', $this).css({
+							'transform': "rotate(" + rotate + "deg)",
+						})
+						if (rotate > 180) {
+							$('.eael-progressbar-circle-pie', $this).css({
+								'-webkit-clip-path': 'inset(0)',
+								'clip-path': 'inset(0)',
+							})
+							$('.eael-progressbar-circle-half-right', $this).css({
+								'visibility': 'visible'
+							})
+						}
+					}
+
+					$(this).text(Math.ceil(counter))
+				}
+			})
+		})
+	}
+}(jQuery));
 typeof navigator === "object" && (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('Plyr', factory) :
@@ -38957,15 +38961,19 @@ return $;
                 ) {
                     $this.remove();
                 } else {
-                    $(".eael-post-appender", $scope).append($content);
+                    if($data.class == "Essential_Addons_Elementor\\Elements\\Product_Grid") {
+                        $(".eael-product-grid .products", $scope).append($content);
+                    }else {
+                        $(".eael-post-appender", $scope).append($content);
 
-                    if ($layout == "masonry") {
-                        var $isotope = $(".eael-post-appender", $scope).isotope();
-                        $isotope.isotope("appended", $content).isotope("layout");
-
-                        $isotope.imagesLoaded().progress(function () {
-                            $isotope.isotope("layout");
-                        });
+                        if ($layout == "masonry") {
+                            var $isotope = $(".eael-post-appender", $scope).isotope();
+                            $isotope.isotope("appended", $content).isotope("layout");
+    
+                            $isotope.imagesLoaded().progress(function () {
+                                $isotope.isotope("layout");
+                            });
+                        }
                     }
 
                     $this.removeClass("button--loading");
@@ -39109,9 +39117,8 @@ var AdvanceTabHandler = function($scope, $) {
         var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
             $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
             $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
-        var $imgCompContainer = tabsContent.eq(currentTabIndex).find('.eael-img-comp-container');
-            
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed'),
+            $paGallery = tabsContent.eq(currentTabIndex).find('.premium-gallery-container');
 
         if($postGridGallery.length) {
             $postGridGallery.isotope();
@@ -39120,17 +39127,19 @@ var AdvanceTabHandler = function($scope, $) {
         if($twitterfeedGallery.length) {
             $twitterfeedGallery.isotope("layout");
         }
-        
+
         if($filterGallery.length) {
             $filterGallery.isotope("layout");
         }
-        
+
         if($instaGallery.length) {
             $instaGallery.isotope("layout");
         }
 
-        if($imgCompContainer.length) {
-            $imgCompContainer.isotope("layout");
+        if($paGallery.length) {
+            $paGallery.each(function(index, item) {
+                $(item).isotope("layout");
+            });
         }
 
         $(tabsContent).each(function(index) {
@@ -39228,9 +39237,6 @@ var Advanced_Data_Table = function($scope, $) {
 
 	if (isEditMode) {
 		var attr = "readonly";
-
-		// add edit class
-		table.classList.add("ea-advanced-data-table-editable");
 
 		if (table.classList.contains("ea-advanced-data-table-static")) {
 			attr = "";
@@ -39412,6 +39418,7 @@ var Advanced_Data_Table = function($scope, $) {
 		// paginated table
 		if (table.classList.contains("ea-advanced-data-table-paginated")) {
 			var paginationHTML = "";
+			var paginationType = pagination.classList.contains("ea-advanced-data-table-pagination-button") ? "button" : "select";
 			var currentPage = 1;
 			var startIndex = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
 			var endIndex = currentPage * table.dataset.itemsPerPage;
@@ -39419,14 +39426,22 @@ var Advanced_Data_Table = function($scope, $) {
 
 			// insert pagination
 			if (maxPages > 1) {
-				for (var i = 1; i <= maxPages; i++) {
-					paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
-				}
+				if (paginationType == "button") {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<a href="#" data-page="' + i + '" class="' + (i == 1 ? "ea-advanced-data-table-pagination-current" : "") + '">' + i + "</a>";
+					}
 
-				pagination.insertAdjacentHTML(
-					"beforeend",
-					'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
-				);
+					pagination.insertAdjacentHTML(
+						"beforeend",
+						'<a href="#" data-page="1">&laquo;</a>' + paginationHTML + '<a href="#" data-page="' + maxPages + '">&raquo;</a>'
+					);
+				} else {
+					for (var i = 1; i <= maxPages; i++) {
+						paginationHTML += '<option value="' + i + '">' + i + "</option>";
+					}
+
+					pagination.insertAdjacentHTML("beforeend", "<select>" + paginationHTML + "</select>");
+				}
 			}
 
 			// make initial item visible
@@ -39439,43 +39454,88 @@ var Advanced_Data_Table = function($scope, $) {
 			}
 
 			// paginate on click
-			pagination.addEventListener("click", function(e) {
-				e.preventDefault();
+			if (paginationType == "button") {
+				pagination.addEventListener("click", function(e) {
+					e.preventDefault();
 
-				if (e.target.tagName.toLowerCase() == "a") {
-					currentPage = e.target.dataset.page;
-					offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
-					startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
-					endIndex = currentPage * table.dataset.itemsPerPage;
+					if (e.target.tagName.toLowerCase() == "a") {
+						currentPage = e.target.dataset.page;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
 
-					pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
-						el.classList.remove("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll(".ea-advanced-data-table-pagination-current").forEach(function(el) {
+							el.classList.remove("ea-advanced-data-table-pagination-current");
+						});
 
-					pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
-						el.classList.add("ea-advanced-data-table-pagination-current");
-					});
+						pagination.querySelectorAll('[data-page="' + currentPage + '"]').forEach(function(el) {
+							el.classList.add("ea-advanced-data-table-pagination-current");
+						});
 
-					for (var i = offset; i <= table.rows.length - 1; i++) {
-						if (i >= startIndex && i <= endIndex) {
-							table.rows[i].style.display = "table-row";
-						} else {
-							table.rows[i].style.display = "none";
-						}
-					}
-
-					table.querySelectorAll("th").forEach(function(el, index) {
-						el.classList.remove("asc", "desc");
-
-						if (typeof classCollection[currentPage] != "undefined") {
-							if (classCollection[currentPage][index]) {
-								el.classList.add(classCollection[currentPage][index]);
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
 							}
 						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
+					}
+				});
+			} else {
+				if (pagination.hasChildNodes()) {
+					pagination.querySelector("select").addEventListener("input", function(e) {
+						e.preventDefault();
+
+						currentPage = e.target.value;
+						offset = table.rows[0].parentNode.tagName.toLowerCase() == "thead" ? 1 : 0;
+						startIndex = (currentPage - 1) * table.dataset.itemsPerPage + offset;
+						endIndex = currentPage * table.dataset.itemsPerPage;
+
+						for (var i = offset; i <= table.rows.length - 1; i++) {
+							if (i >= startIndex && i <= endIndex) {
+								table.rows[i].style.display = "table-row";
+							} else {
+								table.rows[i].style.display = "none";
+							}
+						}
+
+						table.querySelectorAll("th").forEach(function(el, index) {
+							el.classList.remove("asc", "desc");
+
+							if (typeof classCollection[currentPage] != "undefined") {
+								if (classCollection[currentPage][index]) {
+									el.classList.add(classCollection[currentPage][index]);
+								}
+							}
+						});
 					});
 				}
-			});
+			}
 		}
+
+		// woocommerce
+		table.querySelectorAll(".nt_button_woo").forEach(function(el) {
+			el.classList.add("add_to_cart_button", "ajax_add_to_cart");
+		});
+
+		table.querySelectorAll(".nt_woo_quantity").forEach(function(el) {
+			el.addEventListener("input", function(e) {
+				var product_id = e.target.dataset.product_id;
+				var quantity = e.target.value;
+
+				$(".nt_add_to_cart_" + product_id, $(table)).data("quantity", quantity);
+			});
+		});
 	}
 };
 
@@ -39534,29 +39594,31 @@ var Advanced_Data_Table_Click_Handler = function(panel, model, view) {
 		if (textarea.value.length > 0) {
 			body += "<tbody>";
 			csvArr.forEach(function(row, index) {
-				cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
+				if (row.length > 0) {
+					cols = row.match(/("(?:[^"\\]|\\.)*"|[^","]+)/gm);
 
-				if (cols.length > 0) {
-					if (enableHeader && index == 0) {
-						header += "<thead><tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								header += "<th>" + JSON.parse(col) + "</th>";
-							} else {
-								header += "<th>" + col + "</th>";
-							}
-						});
-						header += "</tr></thead>";
-					} else {
-						body += "<tr>";
-						cols.forEach(function(col) {
-							if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
-								body += "<td>" + JSON.parse(col) + "</td>";
-							} else {
-								body += "<td>" + col + "</td>";
-							}
-						});
-						body += "</tr>";
+					if (cols.length > 0) {
+						if (enableHeader && index == 0) {
+							header += "<thead><tr>";
+							cols.forEach(function(col) {
+								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+									header += "<th>" + JSON.parse(col) + "</th>";
+								} else {
+									header += "<th>" + col + "</th>";
+								}
+							});
+							header += "</tr></thead>";
+						} else {
+							body += "<tr>";
+							cols.forEach(function(col) {
+								if (col.match(/(^"")|(^")|("$)|(""$)/g)) {
+									body += "<td>" + JSON.parse(col) + "</td>";
+								} else {
+									body += "<td>" + col + "</td>";
+								}
+							});
+							body += "</tr>";
+						}
 					}
 				}
 			});
@@ -40091,73 +40153,6 @@ jQuery(window).on("elementor/frontend/init", function() {
         ContentTicker
     );
 });
-var CountDown = function($scope, $) {
-    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
-        $countdown_id =
-            $coundDown.data("countdown-id") !== undefined
-                ? $coundDown.data("countdown-id")
-                : "",
-        $expire_type =
-            $coundDown.data("expire-type") !== undefined
-                ? $coundDown.data("expire-type")
-                : "",
-        $expiry_text =
-            $coundDown.data("expiry-text") !== undefined
-                ? $coundDown.data("expiry-text")
-                : "",
-        $expiry_title =
-            $coundDown.data("expiry-title") !== undefined
-                ? $coundDown.data("expiry-title")
-                : "",
-        $redirect_url =
-            $coundDown.data("redirect-url") !== undefined
-                ? $coundDown.data("redirect-url")
-                : "",
-        $template =
-            $coundDown.data("template") !== undefined
-                ? $coundDown.data("template")
-                : "";
-
-    jQuery(document).ready(function($) {
-        "use strict";
-        var countDown = $("#eael-countdown-" + $countdown_id);
-
-        countDown.countdown({
-            end: function() {
-                if ($expire_type == "text") {
-                    countDown.html(
-                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
-                            $expiry_title +
-                            "</h4>" +
-                            '<div class="eael-countdown-finish-text">' +
-                            $expiry_text +
-                            "</div></div>"
-                    );
-                } else if ($expire_type === "url") {
-                    var editMode = $("body").find("#elementor").length;
-                    if (editMode > 0) {
-                        countDown.html(
-                            "Your Page will be redirected to given URL (only on Frontend)."
-                        );
-                    } else {
-                        window.location.href = $redirect_url;
-                    }
-                } else if ($expire_type === "template") {
-                    countDown.html($template);
-                } else {
-                    //do nothing!
-                }
-            }
-        });
-    });
-};
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-countdown.default",
-        CountDown
-    );
-});
-
 var dataTable = function($scope, $) {
 	var $_this = $scope.find(".eael-data-table-wrap"),
 		$id = $_this.data("table_id");
@@ -40236,7 +40231,74 @@ jQuery(window).on("elementor/frontend/init", function() {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-data-table.default", dataTable);
 });
 
-var EventCalendar = function($scope, $) {
+var CountDown = function($scope, $) {
+    var $coundDown = $scope.find(".eael-countdown-wrapper").eq(0),
+        $countdown_id =
+            $coundDown.data("countdown-id") !== undefined
+                ? $coundDown.data("countdown-id")
+                : "",
+        $expire_type =
+            $coundDown.data("expire-type") !== undefined
+                ? $coundDown.data("expire-type")
+                : "",
+        $expiry_text =
+            $coundDown.data("expiry-text") !== undefined
+                ? $coundDown.data("expiry-text")
+                : "",
+        $expiry_title =
+            $coundDown.data("expiry-title") !== undefined
+                ? $coundDown.data("expiry-title")
+                : "",
+        $redirect_url =
+            $coundDown.data("redirect-url") !== undefined
+                ? $coundDown.data("redirect-url")
+                : "",
+        $template =
+            $coundDown.data("template") !== undefined
+                ? $coundDown.data("template")
+                : "";
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var countDown = $("#eael-countdown-" + $countdown_id);
+
+        countDown.countdown({
+            end: function() {
+                if ($expire_type == "text") {
+                    countDown.html(
+                        '<div class="eael-countdown-finish-message"><h4 class="expiry-title">' +
+                            $expiry_title +
+                            "</h4>" +
+                            '<div class="eael-countdown-finish-text">' +
+                            $expiry_text +
+                            "</div></div>"
+                    );
+                } else if ($expire_type === "url") {
+                    var editMode = $("body").find("#elementor").length;
+                    if (editMode > 0) {
+                        countDown.html(
+                            "Your Page will be redirected to given URL (only on Frontend)."
+                        );
+                    } else {
+                        window.location.href = $redirect_url;
+                    }
+                } else if ($expire_type === "template") {
+                    countDown.html($template);
+                } else {
+                    //do nothing!
+                }
+            }
+        });
+    });
+};
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-countdown.default",
+        CountDown
+    );
+});
+
+var EventCalendar = function ($scope, $) {
 	var Calendar = FullCalendar.Calendar;
 	var element = $(".eael-event-calendar-cls", $scope),
 		CloseButton = $(".eaelec-modal-close", $scope).eq(0),
@@ -40244,6 +40306,8 @@ var EventCalendar = function($scope, $) {
 		eventAll = element.data("events"),
 		firstDay = element.data("first_day"),
 		calendarID = element.data("cal_id"),
+		locale = element.data("locale"),
+		defaultView = element.data("defaultview"),
 		calendarEl = document.getElementById("eael-event-calendar-" + calendarID);
 
 	var calendar = new Calendar(calendarEl, {
@@ -40263,20 +40327,26 @@ var EventCalendar = function($scope, $) {
 			center: "title",
 			right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek"
 		},
-		buttonText: {
-			today: "Today"
-		},
 		allDayText: "All day",
 		events: eventAll,
 		selectHelper: true,
+		locale: locale,
 		eventLimit: 3,
-		eventRender: function(info) {
+		defaultView: defaultView,
+		eventRender: function (info) {
 			var element = $(info.el),
 				event = info.event;
 
+			// when event is finished event text are cross
+			if (event.extendedProps.eventHasComplete !== undefined && event.extendedProps.eventHasComplete === 'yes') {
+				element.find('div.fc-content .fc-title').addClass('eael-event-completed');
+				element.find('td.fc-list-item-title').addClass('eael-event-completed');
+			}
+
 			element.attr("href", "javascript:void(0);");
-			element.click(function(e) {
+			element.click(function (e) {
 				e.preventDefault();
+				e.stopPropagation();
 				var startDate = event.start,
 					timeFormate = "h:mm A",
 					endDate = event.end,
@@ -40289,21 +40359,27 @@ var EventCalendar = function($scope, $) {
 					timeFormate = " ";
 				}
 
+				var startYear = moment(startDate).format("YYYY"),
+					endYear = moment(endDate).format("YYYY"),
+					yearDiff = endYear > startYear,
+					startView = '',
+					endView = '';
+
 				startSelector.html(" ");
 				endSelector.html(" ");
 				ecModal.addClass("eael-ec-popup-ready").removeClass("eael-ec-modal-removing");
 
 				if (event.allDay === "yes" && moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-					var allDayTime = moment(startDate).format("MMM Do");
+					startView = moment(startDate).format("MMM Do");
 					if (moment(startDate).isSame(Date.now(), "day") === true) {
-						allDayTime = 'Today';
-					}else if(moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")){
-						allDayTime = 'Tomorrow';
+						startView = 'Today';
+					} else if (moment(startDate).format("MM-DD-YYYY") === moment(new Date()).add(1, "days").format("MM-DD-YYYY")) {
+						startView = 'Tomorrow';
 					}
-					startSelector.html('<i class="eicon-calendar"></i> ' + allDayTime);
+
 				} else {
 					if (moment(event.start).isSame(Date.now(), "day") === true) {
-						startSelector.html('<i class="eicon-calendar"></i> Today, ' + moment(event.start).format(timeFormate));
+						startView = 'Today ' + moment(event.start).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
@@ -40311,70 +40387,82 @@ var EventCalendar = function($scope, $) {
 							.add(1, "days")
 							.format("MM-DD-YYYY")
 					) {
-						startSelector.html('<i class="eicon-calendar"></i> Tomorrow, ' + moment(event.start).format(timeFormate));
+						startView = 'Tomorrow ' + moment(event.start).format(timeFormate);
 					}
 
 					if (
 						moment(startDate).format("MM-DD-YYYY") < moment(new Date()).format("MM-DD-YYYY") ||
 						moment(startDate).format("MM-DD-YYYY") >
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
 					) {
-						startSelector.html('<i class="eicon-calendar"></i> ' + moment(event.start).format("MMM Do, " + timeFormate));
+						startView = moment(event.start).format("MMM Do " + timeFormate);
 					}
+
+					startView = (yearDiff) ? startYear + ' ' + startView : startView;
 
 					if (moment(endDate).isSame(Date.now(), "day") === true) {
 						if (moment(startDate).isSame(Date.now(), "day") !== true) {
-							endSelector.html("- Today, " + moment(endDate).format(timeFormate));
+							endView = " Today " + moment(endDate).format(timeFormate);
 						} else {
-							endSelector.html("- " + moment(endDate).format(timeFormate));
+							endView = moment(endDate).format(timeFormate);
 						}
 					}
 
 					if (
 						moment(startDate).format("MM-DD-YYYY") !==
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY") &&
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
 						moment(endDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
 					) {
-						endSelector.html("- Tomorrow, " + moment(endDate).format(timeFormate));
+						endView = "Tomorrow " + moment(endDate).format(timeFormate);
 					}
 					if (
 						moment(startDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY") &&
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY") &&
 						moment(endDate).format("MM-DD-YYYY") ===
-							moment(new Date())
-								.add(1, "days")
-								.format("MM-DD-YYYY")
+						moment(new Date())
+							.add(1, "days")
+							.format("MM-DD-YYYY")
 					) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
+						endView = moment(endDate).format(timeFormate);
 					}
 					if (moment(endDate).diff(moment(startDate), "days") > 0 && endSelector.text().trim().length < 1) {
-						endSelector.html("- " + moment(endDate).format("MMM Do, " + timeFormate));
+						endView = moment(endDate).format("MMM Do " + timeFormate);
 					}
 
 					if (moment(startDate).format("MM-DD-YYYY") === moment(endDate).format("MM-DD-YYYY")) {
-						endSelector.html("- " + moment(endDate).format(timeFormate));
+						endView = moment(endDate).format(timeFormate)
 					}
+
+					endView = (yearDiff) ? endYear + ' ' + endView : endView;
+
 				}
+
+				if (event.extendedProps.hideEndDate !== undefined && event.extendedProps.hideEndDate === 'yes') {
+					endSelector.html(" ");
+				}else{
+					endSelector.html((endView!='')?"- " + endView:'');
+				}
+				startSelector.html('<i class="eicon-calendar"></i> ' + startView)
 
 				$(".eaelec-modal-header h2").html(event.title);
 				$(".eaelec-modal-body p").html(event.extendedProps.description);
-				if(event.extendedProps.description.length<1){
+				if (event.extendedProps.description.length < 1) {
 					$(".eaelec-modal-body").css("height", "auto");
-				}else {
+				} else {
 					$(".eaelec-modal-body").css("height", "300px");
 				}
 
 				$(".eaelec-modal-footer a").attr("href", event.url);
-				
+
 				if (event.extendedProps.external === "on") {
 					$(".eaelec-modal-footer a").attr("target", "_blank");
 				}
@@ -40391,14 +40479,23 @@ var EventCalendar = function($scope, $) {
 		}
 	});
 
-	CloseButton.on("click", function() {
+	CloseButton.on("click", function () {
+		event.stopPropagation();
 		ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+	});
+
+	$(document).on('click', function (event) {
+		if (event.target.closest(".eaelec-modal-content")) return;
+		if (ecModal.hasClass("eael-ec-popup-ready")) {
+			ecModal.addClass("eael-ec-modal-removing").removeClass("eael-ec-popup-ready");
+		}
+
 	});
 
 	calendar.render();
 };
 
-jQuery(window).on("elementor/frontend/init", function() {
+jQuery(window).on("elementor/frontend/init", function () {
 	elementorFrontend.hooks.addAction("frontend/element_ready/eael-event-calendar.default", EventCalendar);
 });
 
@@ -40422,6 +40519,7 @@ var FacebookFeed = function($scope, $) {
         $this = $(this);
         $settings = $this.attr("data-settings");
         $page = $this.attr("data-page");
+        $loadmore_text = $this.attr("data-loadmore-text");
 
         // update load moer button
         $this.addClass("button--loading");
@@ -40451,7 +40549,7 @@ var FacebookFeed = function($scope, $) {
                 if (response.num_pages > $page) {
                     $this.attr("data-page", parseInt($page) + 1);
                     $this.removeClass("button--loading");
-                    $("span", $this).html("Load more");
+                    $("span", $this).html($loadmore_text);
                 } else {
                     $this.remove();
                 }
@@ -40543,209 +40641,220 @@ jQuery(window).on("elementor/frontend/init", function() {
 });
 
 var filterableGalleryHandler = function($scope, $) {
+	var filterControls = $scope.find(".fg-layout-3-filter-controls").eq(0),
+		filterTrigger = $scope.find("#fg-filter-trigger"),
+		form = $scope.find(".fg-layout-3-search-box"),
+		input = $scope.find("#fg-search-box-input"),
+		searchRegex,
+		buttonFilter,
+		timer;
 
-    var filterControls = $scope.find('.fg-layout-3-filter-controls').eq(0),
-        filterTrigger = $scope.find('#fg-filter-trigger'),
-        form = $scope.find('.fg-layout-3-search-box'),
-        input = $scope.find('#fg-search-box-input'),
-        searchRegex, buttonFilter, timer;
-    var delegateAbc = '';
+	if (form.length) {
+		form.on("submit", function(e) {
+			e.preventDefault();
+		});
+	}
 
-    if(form.length) {
-        form.on('submit', function(e) {
-            e.preventDefault();
-        });
-    }
+	filterTrigger
+		.on("click", function() {
+			filterControls.toggleClass("open-filters");
+		})
+		.blur(function() {
+			filterControls.toggleClass("open-filters");
+		});
 
-    filterTrigger.on('click', function() {
-        filterControls.toggleClass('open-filters');
-    }).blur(function() {
-        filterControls.toggleClass('open-filters');
-    });
+	if (!isEditMode) {
+		var $gallery = $(".eael-filter-gallery-container", $scope),
+			$settings = $gallery.data("settings"),
+			$gallery_items = $gallery.data("gallery-items"),
+			$layout_mode = $settings.grid_style == "masonry" ? "masonry" : "fitRows",
+			$gallery_enabled = $settings.gallery_enabled == "yes" ? true : false;
 
-    if (!isEditMode) {
-        var $gallery = $(".eael-filter-gallery-container", $scope),
-            $settings = $gallery.data("settings"),
-            $gallery_items = $gallery.data("gallery-items"),
-            $layout_mode =
-                $settings.grid_style == "masonry" ? "masonry" : "fitRows",
-            $gallery_enabled =
-                $settings.gallery_enabled == "yes" ? true : false;
+		// init isotope
+		var layoutMode = $(".eael-filter-gallery-wrapper").data("layout-mode");
+		var mfpCaption = $(".eael-filter-gallery-wrapper").data("mfp_caption");
+		var $isotope_gallery = $gallery.isotope({
+			itemSelector: ".eael-filterable-gallery-item-wrap",
+			layoutMode: $layout_mode,
+			percentPosition: true,
+			stagger: 30,
+			transitionDuration: $settings.duration + "ms",
+			filter: function() {
+				var $this = $(this);
+				var $result = searchRegex ? $this.text().match(searchRegex) : true;
+				if (buttonFilter == undefined) {
+					if (layoutMode != "layout_3") {
+						buttonFilter = $scope
+							.find(".eael-filter-gallery-control ul li")
+							.first()
+							.data("filter");
+					} else {
+						buttonFilter = $scope
+							.find(".fg-layout-3-filter-controls li")
+							.first()
+							.data("filter");
+					}
+				}
+				var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
+				return $result && buttonResult;
+			}
+		});
 
-        // init isotope
-        var layoutMode = $('.eael-filter-gallery-wrapper').data('layout-mode');
-        var $isotope_gallery = $gallery.isotope({
-            itemSelector: ".eael-filterable-gallery-item-wrap",
-            layoutMode: $layout_mode,
-            percentPosition: true,
-            stagger: 30,
-            transitionDuration: $settings.duration + "ms",
-            filter: function() {
-                var $this = $(this);
-                var $result = searchRegex ? $this.text().match( searchRegex ) : true;
-                if(buttonFilter == undefined) {
-                    if(layoutMode != 'layout_3') {
-                        buttonFilter = $scope.find('.eael-filter-gallery-control ul li').first().data('filter');
-                    }else {
-                        buttonFilter = $scope.find('.fg-layout-3-filter-controls li').first().data('filter');
-                    }
-                }
-                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
-                return $result && buttonResult;
-            }
-        });
+		// Popup
+		$($scope).magnificPopup({
+			delegate: ".eael-magnific-link",
+			type: "image",
+			gallery: {
+				enabled: $gallery_enabled
+			},
+			image: {
+				titleSrc: function(item) {
+					if (mfpCaption == "yes") {
+						return item.el
+							.parent()
+							.parent()
+							.parent()
+							.parent()
+							.find(".fg-item-title")
+							.html();
+					}
+				}
+			}
+		});
 
-        //alert($settings.widget_id);
-        // Popup
-        $("#eael-filter-gallery-wrapper-"+$settings.widget_id+" .eael-magnific-link").magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: $gallery_enabled
-            },
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            },
-            fixedContentPos: false,
-        });
+		// filter
+		$scope.on("click", ".control", function() {
+			var $this = $(this);
+			buttonFilter = $(this).attr("data-filter");
 
-        // filter
-        $scope.on("click", ".control", function() {
+			if ($scope.find("#fg-filter-trigger > span")) {
+				$scope.find("#fg-filter-trigger > span").text($this.text());
+			}
 
-            var $this = $(this);
-            buttonFilter = $( this ).attr('data-filter');
-            delegateAbc = $( this ).attr('data-filter') + ' a.eael-magnific-link';
+			$this.siblings().removeClass("active");
+			$this.addClass("active");
 
-            if($scope.find('#fg-filter-trigger > span')) {
-                $scope.find('#fg-filter-trigger > span').text($this.text());
-            }
+			$isotope_gallery.isotope();
+		});
 
-            $this.siblings().removeClass("active");
-            $this.addClass("active");
+		//quick search
+		input.on("input", function() {
+			var $this = $(this);
 
-            $('#eael-filter-gallery-wrapper-'+$settings.widget_id+' '+delegateAbc).magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: $gallery_enabled,
-                },
-                callbacks: {
-                    close: function() {
-                        $('#elementor-lightbox').hide();
-                    }
-                },
-                fixedContentPos: false,
-            });
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				searchRegex = new RegExp($this.val(), "gi");
+				$isotope_gallery.isotope();
+			}, 600);
+		});
 
-            $isotope_gallery.isotope();
-        });
+		// layout gal, while images are loading
+		$isotope_gallery.imagesLoaded().progress(function() {
+			$isotope_gallery.isotope("layout");
+		});
 
+		// layout gal, on click tabs
+		$isotope_gallery.on("arrangeComplete", function() {
+			$isotope_gallery.isotope("layout");
+		});
 
+		// layout gal, after window loaded
+		$(window).on("load", function() {
+			$isotope_gallery.isotope("layout");
+		});
 
-        //quick search
-        input.on('input', function() {
-            var $this = $(this);
+		// Load more button
+		$scope.on("click", ".eael-gallery-load-more", function(e) {
+			e.preventDefault();
 
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                searchRegex = new RegExp($this.val(), 'gi');
-                $isotope_gallery.isotope();
-            }, 600);
+			var $this = $(this),
+				$init_show = $(".eael-filter-gallery-container", $scope).children(".eael-filterable-gallery-item-wrap").length,
+				$total_items = $gallery.data("total-gallery-items"),
+				$images_per_page = $gallery.data("images-per-page"),
+				$nomore_text = $gallery.data("nomore-item-text"),
+				$items = [];
 
-        });
+			if ($init_show == $total_items) {
+				$this.html('<div class="no-more-items-text">' + $nomore_text + "</div>");
+				setTimeout(function() {
+					$this.fadeOut("slow");
+				}, 600);
+			}
 
-        // layout gal, while images are loading
-        $isotope_gallery.imagesLoaded().progress(function() {
-            $isotope_gallery.isotope("layout");
-        });
+			// new items html
+			for (var i = $init_show; i < $init_show + $images_per_page; i++) {
+				$items.push($($gallery_items[i])[0]);
+			}
 
-        // layout gal, on click tabs
-        $isotope_gallery.on("arrangeComplete", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        // layout gal, after window loaded
-        $(window).on("load", function() {
-            $isotope_gallery.isotope("layout");
-        });
-
-        
-
-        // popup
-        $($scope).magnificPopup({
-            delegate: ".eael-magnific-video-link",
-            type: "iframe",
-            callbacks: {
-                close: function() {
-                    $("#elementor-lightbox").hide();
-                }
-            }
-        });
-
-        // Load more button
-        $scope.on("click", ".eael-gallery-load-more", function(e) {
-            e.preventDefault();
-
-            var $this = $(this),
-                $init_show = $(
-                    ".eael-filter-gallery-container",
-                    $scope
-                ).children(".eael-filterable-gallery-item-wrap").length,
-                $total_items = $gallery.data("total-gallery-items"),
-                $images_per_page = $gallery.data("images-per-page"),
-                $nomore_text = $gallery.data("nomore-item-text"),
-                $items = [];
-
-            if ($init_show == $total_items) {
-                $this.html(
-                    '<div class="no-more-items-text">' + $nomore_text + "</div>"
-                );
-                setTimeout(function() {
-                    $this.fadeOut("slow");
-                }, 600);
-            }
-
-            // new items html
-            for (var i = $init_show; i < $init_show + $images_per_page; i++) {
-                $items.push($($gallery_items[i])[0]);
-            }
-
-            // append items
-            $gallery.append($items);
-            $isotope_gallery.isotope("appended", $items);
-            $isotope_gallery.imagesLoaded().progress(function() {
-                $isotope_gallery.isotope("layout");
-            });
-
-            // reinit magnificPopup
-            $(".eael-magnific-link", $scope).magnificPopup({
-                type: "image",
-                gallery: {
-                    enabled: $gallery_enabled
-                },
-                callbacks: {
-                    close: function() {
-                        $("#elementor-lightbox").hide();
-                    }
-                }
-            });
-        });
-    }
+			// append items
+			$gallery.append($items);
+			$isotope_gallery.isotope("appended", $items);
+			$isotope_gallery.imagesLoaded().progress(function() {
+				$isotope_gallery.isotope("layout");
+			});
+		});
+	}
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-filterable-gallery.default",
-        filterableGalleryHandler
-    );
+	elementorFrontend.hooks.addAction("frontend/element_ready/eael-filterable-gallery.default", filterableGalleryHandler);
 });
 
 (function($) {
-    window.isEditMode = false;
+	window.isEditMode = false;
 
-    $(window).on("elementor/frontend/init", function() {
-        window.isEditMode = elementorFrontend.isEditMode();
-    });
+	$(window).on("elementor/frontend/init", function() {
+		window.isEditMode = elementorFrontend.isEditMode();
+
+		if (isEditMode) {
+			parent.document.addEventListener("mousedown", function(e) {
+				var widgets = parent.document.querySelectorAll(".elementor-element--promotion");
+
+				if (widgets.length > 0) {
+					for (var i = 0; i < widgets.length; i++) {
+						if (widgets[i].contains(e.target)) {
+							var dialog = parent.document.querySelector("#elementor-element--promotion__dialog");
+							var icon = widgets[i].querySelector(".icon > i");
+
+							if (icon.classList.toString().indexOf("eaicon") >= 0) {
+								dialog.querySelector(".dialog-buttons-action").style.display = "none";
+
+								if (dialog.querySelector(".ea-dialog-buttons-action") === null) {
+									var button = document.createElement("a");
+									var buttonText = document.createTextNode("Upgrade Essential Addons");
+
+									button.setAttribute("href", "https://wpdeveloper.net/upgrade/ea-pro");
+									button.setAttribute("target", "_blank");
+									button.classList.add(
+										"dialog-button",
+										"dialog-action",
+										"dialog-buttons-action",
+										"elementor-button",
+										"elementor-button-success",
+										"ea-dialog-buttons-action"
+									);
+									button.appendChild(buttonText);
+
+									dialog.querySelector(".dialog-buttons-action").insertAdjacentHTML("afterend", button.outerHTML);
+								} else {
+									dialog.querySelector(".ea-dialog-buttons-action").style.display = "";
+								}
+							} else {
+								dialog.querySelector(".dialog-buttons-action").style.display = "";
+
+								if (dialog.querySelector(".ea-dialog-buttons-action") !== null) {
+									dialog.querySelector(".ea-dialog-buttons-action").style.display = "none";
+								}
+							}
+
+							// stop loop
+							break;
+						}
+					}
+				}
+			});
+		}
+	});
 })(jQuery);
 
 var ImageAccordion = function($scope, $) {
@@ -40758,7 +40867,7 @@ var ImageAccordion = function($scope, $) {
             $imageAccordion.data("img-accordion-type") !== undefined
                 ? $imageAccordion.data("img-accordion-type")
                 : "";
-
+    
     if ("on-click" === $type) {
         $("#eael-img-accordion-" + $id + " a").on("click", function(e) {
             if ($(this).hasClass("overlay-active") == false) {
@@ -40798,18 +40907,21 @@ jQuery(window).on("elementor/frontend/init", function() {
 });
 
 var PostGrid = function($scope, $) {
-    var $gallery = $(".eael-post-appender", $scope).isotope({
-        itemSelector: ".eael-grid-post",
-        masonry: {
-            columnWidth: ".eael-post-grid-column",
+    var $gallery = $(".eael-post-appender", $scope),
+        $layout_mode = $gallery.data('layout-mode');
+        
+    if($layout_mode === 'masonry') {
+        $gallery.isotope({
+            itemSelector: ".eael-grid-post",
+            layoutMode: $layout_mode,
             percentPosition: true
-        }
-    });
+        });
 
-    // layout gal, while images are loading
-    $gallery.imagesLoaded().progress(function() {
-        $gallery.isotope("layout");
-    });
+        // layout gal, while images are loading
+        $gallery.imagesLoaded().progress(function() {
+            $gallery.isotope("layout");
+        });
+    }
 };
 
 jQuery(window).on("elementor/frontend/init", function() {
@@ -40958,13 +41070,14 @@ var eaelsvPosition = '';
 var eaelsvWidth = 0;
 var eaelsvHeight = 0;
 var eaelsvDomHeight = 0;
-var videoIsActive = 0;
+var videoIsActive = 'off';
 var eaelMakeItSticky = 0;
 var scrollHeight = 0;
 
 jQuery(window).on('elementor/frontend/init', function () {
     
     if (isEditMode) {
+        
         elementor.hooks.addAction('panel/open_editor/widget/eael-sticky-video', function(panel, model, view) {
             var interval;
 
@@ -41013,70 +41126,65 @@ jQuery(window).on('elementor/frontend/init', function () {
         var playerAbc = new Plyr('#eaelsv-player-' + $scope.data('id'));
 
         // If element is Sticky video
-        if (sticky === 'yes') {
+        if (overlay === 'no') {
             // If autoplay is enable
-            if ('yes' === autoplay && overlay === 'no') {
+            if ('yes' === autoplay && sticky === 'yes') {
                 eaelsvDomHeight = GetDomElementHeight(element);
                 element.attr('id', 'videobox');
 
-                if (videoIsActive == 0) {
-                    videoIsActive = 1;
-                }
-            }
+                videoIsActive = 'on';
 
-            // When play event is cliked
-            // Do the sticky process
-            PlayerPlay(playerAbc, element);
+                // When play event is cliked
+                // Do the sticky process
+                PlayerPlay(playerAbc, element);
+            }
         }
 
         // Overlay Operation Started
         if (overlay === 'yes') {
             var ovrlyElmnt = element.prev();
-
+            videoIsActive = 'off';
             $(ovrlyElmnt).on('click', function () {
                 $(this).css('display', 'none');
 
-                if (
-                    $(this)
-                        .next()
-                        .data('autoplay') === 'yes'
-                ) {
+                if ($(this).next().data('autoplay') === 'yes') {
                     playerAbc.restart();
                     eaelsvDomHeight = GetDomElementHeight(this);
-                    $(this)
-                        .next()
-                        .attr('id', 'videobox');
-                    videoIsActive = 1;
+                    if (sticky === 'yes') {
+                        $(this).next().attr('id', 'videobox');
+                        videoIsActive = 'on';
+                    }
                 }
             });
         }
+        
         playerAbc.on('pause', function (event) {
-            if (videoIsActive == 1) {
-                videoIsActive = 0;
-            }
+            videoIsActive = 'off';
+        });
+        
+        playerAbc.on('play', function (event) {
+            videoIsActive = 'on';
         });
 
         $('.eaelsv-sticky-player-close').on('click', function () {
             element.removeClass('out').addClass('in');
             $('.eael-sticky-video-player2').removeAttr('style');
-            videoIsActive = 0;
+            videoIsActive = 'off';
         });
 
         element.parent().css('height', element.height() + 'px');
         $(window).resize(function() {
             element.parent().css('height', element.height() + 'px');
         });
-    });
-
+    }); 
 });
 
-jQuery(window).scroll(function () {
+jQuery(window).scroll(function() {
     var scrollTop = jQuery(window).scrollTop();
     var scrollBottom = jQuery(document).height() - scrollTop;
-
     if (scrollBottom > jQuery(window).height() + 400) {
         if (scrollTop >= eaelsvDomHeight) {
-            if (videoIsActive == 1) {
+            if (videoIsActive == 'on') {
                 jQuery('#videobox')
                     .find('.eaelsv-sticky-player-close')
                     .css('display', 'block');
@@ -41134,7 +41242,7 @@ function PlayerPlay(a, b) {
         jQuery('.eael-sticky-video-player2').removeClass('out');
         b.attr('id', 'videobox');
 
-        videoIsActive = 1;
+        videoIsActive = 'on';
         eaelsvPosition = b.data('position');
         eaelsvHeight = b.data('sheight');
         eaelsvWidth = b.data('swidth');
@@ -41145,64 +41253,43 @@ function RunStickyPlayer(elem) {
     var ovrplyer = new Plyr('#' + elem);
     ovrplyer.start();
 }
-
-var TwitterFeedHandler = function($scope, $) {
-    if (!isEditMode) {
-        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
-        $settings = {
-            itemSelector: ".eael-twitter-feed-item",
-            percentPosition: true,
-            masonry: {
-                columnWidth: ".eael-twitter-feed-item",
-                gutter: $gutter
-            }
-        };
-
-        // init isotope
-        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
-            $settings
-        );
-
-        // layout gal, while images are loading
-        $twitter_feed_gallery.imagesLoaded().progress(function() {
-            $twitter_feed_gallery.isotope("layout");
-        });
-    }
-};
-
-jQuery(window).on("elementor/frontend/init", function() {
-    elementorFrontend.hooks.addAction(
-        "frontend/element_ready/eael-twitter-feed.default",
-        TwitterFeedHandler
-    );
-});
-
-(function($) {
-	jQuery(document).ready(function() {
+(function ($) {
+	jQuery(document).ready(function () {
 		/**
 		 * add ID in main content heading tag
 		 * @param selector
 		 * @param supportTag
 		 */
 		function eael_toc_content(selector, supportTag) {
-			if (selector === null || supportTag === undefined) {
+			var listId = document.getElementById("eael-toc-list");
+			if (selector === null || supportTag === undefined || !listId) {
 				return null;
 			}
-			var mainSelector = document.querySelector(selector),
-				allSupportTag = Array.prototype.slice.call(mainSelector.querySelectorAll(supportTag)),
+
+			var allSupportTag = [];
+			var mainSelector = document.querySelectorAll(selector),
 				listIndex = 0;
 
-			allSupportTag.forEach(function(el) {
+			for(var j = 0;j<mainSelector.length;j++){
+				var featchTag  = mainSelector[j].querySelectorAll(supportTag);
+				Array.prototype.push.apply(allSupportTag,featchTag);
+			}
+
+			allSupportTag = Array.prototype.slice.call(allSupportTag);
+
+			allSupportTag.forEach(function (el) {
 				el.id = listIndex + "-" + eael_build_id();
 				el.classList.add("eael-heading-content");
 				listIndex++;
 			});
+			//build toc list hierarchy
 			eael_list_hierarchy(selector, supportTag);
+
 			var firstChild = $("ul.eael-toc-list > li");
 			if (firstChild.length < 1) {
 				document.getElementById("eael-toc").classList.add("eael-toc-disable");
 			}
-			firstChild.each(function() {
+			firstChild.each(function () {
 				this.classList.add("eael-first-child");
 			});
 		}
@@ -41215,10 +41302,9 @@ jQuery(window).on("elementor/frontend/init", function() {
 		function eael_list_hierarchy(selector, supportTag) {
 			var tagList = supportTag;
 			var parentLevel = '';
+			var allHeadings = [];
 			var listId = document.getElementById("eael-toc-list");
-			var mainContent = document.querySelector(selector),
-
-			allHeadings = mainContent.querySelectorAll(tagList),
+			var mainContent = document.querySelectorAll(selector),
 				baseTag = parentLevel = tagList
 					.trim()
 					.split(",")[0]
@@ -41226,6 +41312,12 @@ jQuery(window).on("elementor/frontend/init", function() {
 				ListNode = listId;
 
 			listId.innerHTML = "";
+
+			for(var j = 0;j<mainContent.length;j++){
+				var featchTag  = mainContent[j].querySelectorAll(tagList);
+				Array.prototype.push.apply(allHeadings,featchTag);
+			}
+
 			if (allHeadings.length > 0) {
 				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
 			}
@@ -41285,13 +41377,9 @@ jQuery(window).on("elementor/frontend/init", function() {
 			}
 		}
 
-		var intSupportTag = $("#eael-toc").data("eaeltoctag");
-		if (intSupportTag !== "") {
-			eael_toc_content(eael_toc_check_content(), intSupportTag);
-		}
 
 		// expand collapse
-		$(document).on("click", "ul.eael-toc-list a", function(e) {
+		$(document).on("click", "ul.eael-toc-list a", function (e) {
 			e.preventDefault();
 
 			$(document).off("scroll");
@@ -41319,9 +41407,10 @@ jQuery(window).on("elementor/frontend/init", function() {
 			window.location.hash = target;
 		});
 
-		window.onscroll = function() {
+		//some site not working with **window.onscroll**
+		window.addEventListener('scroll', function(e) {
 			eaelTocSticky();
-		};
+		});
 		var stickyScroll = $('#eael-toc').data('stickyscroll');
 
 		/**
@@ -41332,8 +41421,8 @@ jQuery(window).on("elementor/frontend/init", function() {
 			if (!eaelToc) {
 				return;
 			}
-			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
-			if (window.pageYOffset >= stickyScroll) {
+			stickyScroll = (stickyScroll !== undefined) ? stickyScroll : 200;
+			if (window.pageYOffset >= stickyScroll && !eaelToc.classList.contains('eael-toc-disable')) {
 				eaelToc.classList.add("eael-sticky");
 			} else {
 				eaelToc.classList.remove("eael-sticky");
@@ -41355,7 +41444,9 @@ jQuery(window).on("elementor/frontend/init", function() {
 		 */
 		function eael_toc_check_content() {
 			var contentSelectro = '.site-content';
-			if ($(".elementor-inner")[0]) {
+			if ($(".site-content")[0]) {
+				contentSelectro = ".site-content";
+			} else if ($(".elementor-inner")[0]) {
 				contentSelectro = ".elementor-inner";
 			} else if ($("#site-content")[0]) {
 				contentSelectro = "#site-content";
@@ -41364,15 +41455,15 @@ jQuery(window).on("elementor/frontend/init", function() {
 		}
 
 		//toc auto collapse
-		$("body").click(function(e) {
+		$("body").click(function (e) {
 			var target = $(e.target);
 			var eaToc = $("#eael-toc");
-			if (eaToc.hasClass("eael-toc-auto-collapse") && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
+			if ((eaToc.hasClass("eael-toc-auto-collapse") && eaToc.hasClass("eael-sticky")) && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
 				eaToc.toggleClass("collapsed");
 			}
 		});
 
-		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function(event) {
+		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function (event) {
 			event.stopPropagation();
 			$(".eael-toc").toggleClass("collapsed");
 		});
@@ -41381,7 +41472,6 @@ jQuery(window).on("elementor/frontend/init", function() {
 			var pageSetting = $settings.settings,
 				title = pageSetting.eael_ext_toc_title,
 				toc_style_class = "eael-toc-list eael-toc-list-" + pageSetting.eael_ext_table_of_content_list_style,
-				support_tag = pageSetting.eael_ext_toc_supported_heading_tag.join(", "),
 				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
 				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
 			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
@@ -41406,9 +41496,28 @@ jQuery(window).on("elementor/frontend/init", function() {
 			);
 		}
 
+
+		var intSupportTag = $("#eael-toc").data("eaeltoctag");
+		if (intSupportTag !== "") {
+			eael_toc_content(eael_toc_check_content(), intSupportTag);
+		}
+
+
 		//editor mode
 		if (isEditMode) {
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function(newValue) {
+
+			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
+				var tocLoad = $('#eael-toc #eael-toc-list');
+				var TocList = tocLoad.find('li.eael-first-child');
+				if (TocList.length < 1 && tocLoad.length >= 1) {
+					var tagList = $("#eael-toc").data("eaeltoctag");
+					if (tagList) {
+						eael_toc_content(eael_toc_check_content(), tagList);
+					}
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function (newValue) {
 				var tocGlobal = $(".eael-toc-global");
 				if (tocGlobal.length > 0) {
 					tocGlobal
@@ -41432,7 +41541,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function (newValue) {
 				if (newValue === "right") {
 					$("#eael-toc").addClass("eael-toc-right");
 				} else {
@@ -41440,7 +41549,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function (newValue) {
 				var list = $(".eael-toc-list");
 				list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
 				if (newValue !== "none") {
@@ -41459,12 +41568,12 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			}
 
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function (newValue) {
 				var iconElement = $(".eael-toc-button i");
 				iconElement.removeClass().addClass(newValue.value);
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function (newValue) {
 				var list = $(".eael-toc-list");
 				if (newValue === "number") {
 					list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
@@ -41473,7 +41582,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function (newValue) {
 				var list = $(".eael-toc-list");
 				if (newValue === "yes") {
 					list.addClass("eael-toc-word-wrap");
@@ -41482,7 +41591,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function (newValue) {
 				var toc = $("#eael-toc");
 				if (newValue === "bottom_to_top") {
 					toc.addClass("eael-bottom-to-top");
@@ -41491,7 +41600,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function (newValue) {
 				var toc = $("#eael-toc");
 				if (newValue === "yes") {
 					toc.addClass("eael-box-shadow");
@@ -41500,7 +41609,7 @@ jQuery(window).on("elementor/frontend/init", function() {
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function (newValue) {
 				var toc = $("#eael-toc");
 				if (newValue === "yes") {
 					toc.addClass("eael-toc-auto-collapse");
@@ -41518,3 +41627,34 @@ jQuery(window).on("elementor/frontend/init", function() {
 		}
 	});
 })(jQuery);
+
+var TwitterFeedHandler = function($scope, $) {
+    if (!isEditMode) {
+        $gutter = $(".eael-twitter-feed-masonry", $scope).data("gutter");
+        $settings = {
+            itemSelector: ".eael-twitter-feed-item",
+            percentPosition: true,
+            masonry: {
+                columnWidth: ".eael-twitter-feed-item",
+                gutter: $gutter
+            }
+        };
+
+        // init isotope
+        $twitter_feed_gallery = $(".eael-twitter-feed-masonry", $scope).isotope(
+            $settings
+        );
+
+        // layout gal, while images are loading
+        $twitter_feed_gallery.imagesLoaded().progress(function() {
+            $twitter_feed_gallery.isotope("layout");
+        });
+    }
+};
+
+jQuery(window).on("elementor/frontend/init", function() {
+    elementorFrontend.hooks.addAction(
+        "frontend/element_ready/eael-twitter-feed.default",
+        TwitterFeedHandler
+    );
+});

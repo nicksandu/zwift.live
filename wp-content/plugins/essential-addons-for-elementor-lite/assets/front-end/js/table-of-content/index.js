@@ -1,29 +1,40 @@
-(function($) {
-	jQuery(document).ready(function() {
+(function ($) {
+	jQuery(document).ready(function () {
 		/**
 		 * add ID in main content heading tag
 		 * @param selector
 		 * @param supportTag
 		 */
 		function eael_toc_content(selector, supportTag) {
-			if (selector === null || supportTag === undefined) {
+			var listId = document.getElementById("eael-toc-list");
+			if (selector === null || supportTag === undefined || !listId) {
 				return null;
 			}
-			var mainSelector = document.querySelector(selector),
-				allSupportTag = Array.prototype.slice.call(mainSelector.querySelectorAll(supportTag)),
+
+			var allSupportTag = [];
+			var mainSelector = document.querySelectorAll(selector),
 				listIndex = 0;
 
-			allSupportTag.forEach(function(el) {
+			for(var j = 0;j<mainSelector.length;j++){
+				var featchTag  = mainSelector[j].querySelectorAll(supportTag);
+				Array.prototype.push.apply(allSupportTag,featchTag);
+			}
+
+			allSupportTag = Array.prototype.slice.call(allSupportTag);
+
+			allSupportTag.forEach(function (el) {
 				el.id = listIndex + "-" + eael_build_id();
 				el.classList.add("eael-heading-content");
 				listIndex++;
 			});
+			//build toc list hierarchy
 			eael_list_hierarchy(selector, supportTag);
+
 			var firstChild = $("ul.eael-toc-list > li");
 			if (firstChild.length < 1) {
 				document.getElementById("eael-toc").classList.add("eael-toc-disable");
 			}
-			firstChild.each(function() {
+			firstChild.each(function () {
 				this.classList.add("eael-first-child");
 			});
 		}
@@ -36,10 +47,9 @@
 		function eael_list_hierarchy(selector, supportTag) {
 			var tagList = supportTag;
 			var parentLevel = '';
+			var allHeadings = [];
 			var listId = document.getElementById("eael-toc-list");
-			var mainContent = document.querySelector(selector),
-
-			allHeadings = mainContent.querySelectorAll(tagList),
+			var mainContent = document.querySelectorAll(selector),
 				baseTag = parentLevel = tagList
 					.trim()
 					.split(",")[0]
@@ -47,6 +57,12 @@
 				ListNode = listId;
 
 			listId.innerHTML = "";
+
+			for(var j = 0;j<mainContent.length;j++){
+				var featchTag  = mainContent[j].querySelectorAll(tagList);
+				Array.prototype.push.apply(allHeadings,featchTag);
+			}
+
 			if (allHeadings.length > 0) {
 				document.getElementById("eael-toc").classList.remove("eael-toc-disable");
 			}
@@ -106,13 +122,9 @@
 			}
 		}
 
-		var intSupportTag = $("#eael-toc").data("eaeltoctag");
-		if (intSupportTag !== "") {
-			eael_toc_content(eael_toc_check_content(), intSupportTag);
-		}
 
 		// expand collapse
-		$(document).on("click", "ul.eael-toc-list a", function(e) {
+		$(document).on("click", "ul.eael-toc-list a", function (e) {
 			e.preventDefault();
 
 			$(document).off("scroll");
@@ -140,9 +152,10 @@
 			window.location.hash = target;
 		});
 
-		window.onscroll = function() {
+		//some site not working with **window.onscroll**
+		window.addEventListener('scroll', function(e) {
 			eaelTocSticky();
-		};
+		});
 		var stickyScroll = $('#eael-toc').data('stickyscroll');
 
 		/**
@@ -153,8 +166,8 @@
 			if (!eaelToc) {
 				return;
 			}
-			stickyScroll = (stickyScroll!==undefined)?stickyScroll:200;
-			if (window.pageYOffset >= stickyScroll) {
+			stickyScroll = (stickyScroll !== undefined) ? stickyScroll : 200;
+			if (window.pageYOffset >= stickyScroll && !eaelToc.classList.contains('eael-toc-disable')) {
 				eaelToc.classList.add("eael-sticky");
 			} else {
 				eaelToc.classList.remove("eael-sticky");
@@ -176,7 +189,9 @@
 		 */
 		function eael_toc_check_content() {
 			var contentSelectro = '.site-content';
-			if ($(".elementor-inner")[0]) {
+			if ($(".site-content")[0]) {
+				contentSelectro = ".site-content";
+			} else if ($(".elementor-inner")[0]) {
 				contentSelectro = ".elementor-inner";
 			} else if ($("#site-content")[0]) {
 				contentSelectro = "#site-content";
@@ -185,15 +200,15 @@
 		}
 
 		//toc auto collapse
-		$("body").click(function(e) {
+		$("body").click(function (e) {
 			var target = $(e.target);
 			var eaToc = $("#eael-toc");
-			if (eaToc.hasClass("eael-toc-auto-collapse") && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
+			if ((eaToc.hasClass("eael-toc-auto-collapse") && eaToc.hasClass("eael-sticky")) && !eaToc.hasClass("collapsed") && $(target).closest("#eael-toc").length === 0) {
 				eaToc.toggleClass("collapsed");
 			}
 		});
 
-		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function(event) {
+		$(document).on("click", ".eael-toc-close ,.eael-toc-button", function (event) {
 			event.stopPropagation();
 			$(".eael-toc").toggleClass("collapsed");
 		});
@@ -202,7 +217,6 @@
 			var pageSetting = $settings.settings,
 				title = pageSetting.eael_ext_toc_title,
 				toc_style_class = "eael-toc-list eael-toc-list-" + pageSetting.eael_ext_table_of_content_list_style,
-				support_tag = pageSetting.eael_ext_toc_supported_heading_tag.join(", "),
 				icon = pageSetting.eael_ext_table_of_content_header_icon.value,
 				el_class = pageSetting.eael_ext_toc_position === "right" ? " eael-toc-right" : " ";
 			toc_style_class += pageSetting.eael_ext_toc_collapse_sub_heading === "yes" ? " eael-toc-collapse" : " ";
@@ -227,9 +241,28 @@
 			);
 		}
 
+
+		var intSupportTag = $("#eael-toc").data("eaeltoctag");
+		if (intSupportTag !== "") {
+			eael_toc_content(eael_toc_check_content(), intSupportTag);
+		}
+
+
 		//editor mode
 		if (isEditMode) {
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function(newValue) {
+
+			elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope, $) {
+				var tocLoad = $('#eael-toc #eael-toc-list');
+				var TocList = tocLoad.find('li.eael-first-child');
+				if (TocList.length < 1 && tocLoad.length >= 1) {
+					var tagList = $("#eael-toc").data("eaeltoctag");
+					if (tagList) {
+						eael_toc_content(eael_toc_check_content(), tagList);
+					}
+				}
+			});
+
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content", function (newValue) {
 				var tocGlobal = $(".eael-toc-global");
 				if (tocGlobal.length > 0) {
 					tocGlobal
@@ -253,7 +286,7 @@
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_position", function (newValue) {
 				if (newValue === "right") {
 					$("#eael-toc").addClass("eael-toc-right");
 				} else {
@@ -261,7 +294,7 @@
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_list_style", function (newValue) {
 				var list = $(".eael-toc-list");
 				list.removeClass("eael-toc-list-bar eael-toc-list-arrow");
 				if (newValue !== "none") {
@@ -280,12 +313,12 @@
 				}
 			}
 
-			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_table_of_content_header_icon", function (newValue) {
 				var iconElement = $(".eael-toc-button i");
 				iconElement.removeClass().addClass(newValue.value);
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_list_icon", function (newValue) {
 				var list = $(".eael-toc-list");
 				if (newValue === "number") {
 					list.addClass("eael-toc-number").removeClass("eael-toc-bullet");
@@ -294,7 +327,7 @@
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_word_wrap", function (newValue) {
 				var list = $(".eael-toc-list");
 				if (newValue === "yes") {
 					list.addClass("eael-toc-word-wrap");
@@ -303,7 +336,7 @@
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_close_button_text_style", function (newValue) {
 				var toc = $("#eael-toc");
 				if (newValue === "bottom_to_top") {
 					toc.addClass("eael-bottom-to-top");
@@ -312,7 +345,7 @@
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_box_shadow", function (newValue) {
 				var toc = $("#eael-toc");
 				if (newValue === "yes") {
 					toc.addClass("eael-box-shadow");
@@ -321,7 +354,7 @@
 				}
 			});
 
-			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function(newValue) {
+			elementor.settings.page.addChangeCallback("eael_ext_toc_auto_collapse", function (newValue) {
 				var toc = $("#eael-toc");
 				if (newValue === "yes") {
 					toc.addClass("eael-toc-auto-collapse");

@@ -65,9 +65,8 @@ var AdvanceTabHandler = function($scope, $) {
         var $filterGallery = tabsContent.eq(currentTabIndex).find('.eael-filter-gallery-container'),
             $postGridGallery = tabsContent.eq(currentTabIndex).find('.eael-post-grid.eael-post-appender'),
             $twitterfeedGallery = tabsContent.eq(currentTabIndex).find('.eael-twitter-feed-masonry'),
-            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed');
-        var $imgCompContainer = tabsContent.eq(currentTabIndex).find('.eael-img-comp-container');
-            
+            $instaGallery = tabsContent.eq(currentTabIndex).find('.eael-instafeed'),
+            $paGallery = tabsContent.eq(currentTabIndex).find('.premium-gallery-container');
 
         if($postGridGallery.length) {
             $postGridGallery.isotope();
@@ -76,17 +75,19 @@ var AdvanceTabHandler = function($scope, $) {
         if($twitterfeedGallery.length) {
             $twitterfeedGallery.isotope("layout");
         }
-        
+
         if($filterGallery.length) {
             $filterGallery.isotope("layout");
         }
-        
+
         if($instaGallery.length) {
             $instaGallery.isotope("layout");
         }
 
-        if($imgCompContainer.length) {
-            $imgCompContainer.isotope("layout");
+        if($paGallery.length) {
+            $paGallery.each(function(index, item) {
+                $(item).isotope("layout");
+            });
         }
 
         $(tabsContent).each(function(index) {

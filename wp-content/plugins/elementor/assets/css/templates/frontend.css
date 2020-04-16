@@ -290,12 +290,18 @@
   hyphens: manual; }
   .elementor *, .elementor *:before, .elementor *:after {
     box-sizing: border-box; }
+  .elementor a {
+    box-shadow: none;
+    text-decoration: none; }
   .elementor hr {
     margin: 0;
     background-color: transparent; }
   .elementor img {
     height: auto;
-    max-width: 100%; }
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none; }
   .elementor .elementor-widget:not(.elementor-widget-text-editor) figure {
     margin: 0; }
   .elementor embed,
@@ -2174,9 +2180,6 @@ body.elementor-page .elementor-widget-menu-anchor {
   .elementor-widget-text-editor .elementor-drop-cap-letter {
     display: inline-block; }
 
-.elementor-widget-toggle .elementor-widget-container {
-  overflow: hidden; }
-
 .elementor-toggle {
   text-align: left; }
   .elementor-toggle .elementor-tab-title {
@@ -3010,6 +3013,8 @@ button.swiper-pagination-bullet {
   position: absolute;
   overflow: hidden;
   transition: background-color 400ms; }
+  .elementor-slideshow__share-menu .elementor-slideshow__share-links a {
+    color: #2C2C2C; }
 
 .elementor-slideshow__share-links {
   display: block;
@@ -3018,7 +3023,6 @@ button.swiper-pagination-bullet {
   right: 67px;
   top: 60px;
   background-color: #fff;
-  color: #2C2C2C;
   border-radius: 3px;
   font-size: 16px;
   padding: 14px 20px;
@@ -3181,13 +3185,13 @@ button.swiper-pagination-bullet {
   font-style: normal; }
 
 @media (max-width: ELEMENTOR_SCREEN_SM_MAX) {
-  .elementor:not(.elementor-edit-area-active) .elementor-hidden-phone {
+  .elementor .elementor-hidden-phone {
     display: none; } }
 
 @media (min-width: ELEMENTOR_SCREEN_MD_MIN) and (max-width: ELEMENTOR_SCREEN_MD_MAX) {
-  .elementor:not(.elementor-edit-area-active) .elementor-hidden-tablet {
+  .elementor .elementor-hidden-tablet {
     display: none; } }
 
 @media (min-width: ELEMENTOR_SCREEN_LG_MIN) {
-  .elementor:not(.elementor-edit-area-active) .elementor-hidden-desktop {
+  .elementor .elementor-hidden-desktop {
     display: none; } }

@@ -75,6 +75,7 @@ abstract class Document extends Controls_Stack {
 			'is_editable' => true,
 			'edit_capability' => '',
 			'show_in_finder' => true,
+			'show_on_admin_bar' => true,
 			'support_kit' => false,
 		];
 	}
@@ -255,7 +256,9 @@ abstract class Document extends Controls_Stack {
 			$attributes['class'] .= ' elementor-bc-flex-widget';
 		}
 
-		if ( ! Plugin::$instance->preview->is_preview_mode( $id ) ) {
+		if ( Plugin::$instance->preview->is_preview() ) {
+			$attributes['data-elementor-title'] = static::get_title();
+		} else {
 			$attributes['data-elementor-settings'] = wp_json_encode( $this->get_frontend_settings() );
 		}
 
@@ -268,9 +271,15 @@ abstract class Document extends Controls_Stack {
 	 */
 	public function get_wp_preview_url() {
 		$main_post_id = $this->get_main_id();
+		$document = $this;
+
+		// Ajax request from editor.
+		if ( ! empty( $_POST['initial_document_id'] ) ) {
+			$document = Plugin::$instance->documents->get( $_POST['initial_document_id'] );
+		}
 
 		$url = get_preview_post_link(
-			$main_post_id,
+			$document->get_main_id(),
 			[
 				'preview_id' => $main_post_id,
 				'preview_nonce' => wp_create_nonce( 'post_preview_' . $main_post_id ),
@@ -461,6 +470,7 @@ abstract class Document extends Controls_Stack {
 				'preview' => $this->get_preview_url(),
 				'wp_preview' => $this->get_wp_preview_url(),
 				'permalink' => $this->get_permalink(),
+				'have_a_look' => $this->get_have_a_look_url(),
 			],
 		];
 
@@ -1135,6 +1145,7 @@ abstract class Document extends Controls_Stack {
 	protected function get_remote_library_config() {
 		$config = [
 			'type' => 'block',
+			'default_route' => 'templates/blocks',
 			'category' => $this->get_name(),
 			'autoImportSettings' => false,
 		];
@@ -1218,5 +1229,9 @@ abstract class Document extends Controls_Stack {
 
 	protected function get_post_statuses() {
 		return get_post_statuses();
+	}
+
+	protected function get_have_a_look_url() {
+		return $this->get_permalink();
 	}
 }
