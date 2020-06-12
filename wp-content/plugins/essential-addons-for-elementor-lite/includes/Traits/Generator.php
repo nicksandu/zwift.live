@@ -20,7 +20,7 @@ trait Generator
         global $wp_query;
 
         $uid = null;
-
+        
         if ($wp_query->is_home) {
             $uid = 'home';
         } else if ($wp_query->is_search) {
@@ -31,18 +31,14 @@ trait Generator
             $uid = 'post-' . get_queried_object_id();
         } elseif ($wp_query->is_archive) {
             if ($wp_query->is_post_type_archive) {
-                if (isset($wp_query->query['post_type'])) {
-                    $uid = 'post-type-archive-' . $wp_query->query['post_type'];
-                } else if (isset($wp_query->query_vars['post_type'])) {
-                    $uid = 'post-type-archive-' . $wp_query->query_vars['post_type'];
-                }
+                $uid = 'post-type-archive-' . $wp_query->query['post_type'];
             } else {
                 $uid = 'archive-' . $wp_query->queried_object_id;
             }
         }
 
         if ($uid) {
-            $this->request_uid = substr(md5($uid), 0, 16);
+            $this->request_uid = md5($uid);
         }
     }
 
@@ -107,39 +103,27 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_dependency(array $elements, $type, $context)
+    public function generate_dependency(array $elements, $type)
     {
-        $lib  = ['view' => [], 'edit' => []];
-        $self = ['general' => [], 'view' => [], 'edit' => []];
-
-        if ($type == 'js') {
-            $self['general'][] = EAEL_PLUGIN_PATH . 'assets/front-end/js/view/general.min.js';
-            $self['edit'][]    = EAEL_PLUGIN_PATH . 'assets/front-end/js/edit/promotion.min.js';
-        } else if ($type == 'css') {
-            $self['view'][] = EAEL_PLUGIN_PATH . "assets/front-end/css/view/general.min.css";
-        }
+        $paths = [];
 
         foreach ($elements as $element) {
             if (isset($this->registered_elements[$element])) {
                 if (!empty($this->registered_elements[$element]['dependency'][$type])) {
-                    foreach ($this->registered_elements[$element]['dependency'][$type] as $file) {
-                        ${$file['type']}[$file['context']][] = $file['file'];
+                    foreach ($this->registered_elements[$element]['dependency'][$type] as $path) {
+                        $paths[] = $path;
                     }
                 }
             } elseif (isset($this->registered_extensions[$element])) {
                 if (!empty($this->registered_extensions[$element]['dependency'][$type])) {
-                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $file) {
-                        ${$file['type']}[$file['context']][] = $file['file'];
+                    foreach ($this->registered_extensions[$element]['dependency'][$type] as $path) {
+                        $paths[] = $path;
                     }
                 }
             }
         }
 
-        if ($context == 'view') {
-            return array_unique(array_merge($lib['view'], $self['general'], $self['view']));
-        }
-
-        return array_unique(array_merge($lib['view'], $lib['edit'], $self['general'], $self['edit'], $self['view']));
+        return array_unique($paths);
     }
 
     /**
@@ -147,9 +131,9 @@ trait Generator
      *
      * @since 3.0.0
      */
-    public function generate_scripts($elements, $file_name = null, $context)
+    public function generate_scripts($elements, $file_name = null)
     {
-        if (empty($elements) || EAEL_DEV_MODE) {
+        if (empty($elements)) {
             return;
         }
 
@@ -158,9 +142,17 @@ trait Generator
             wp_mkdir_p(EAEL_ASSET_PATH);
         }
 
+        // collect eael js
+        $js_paths = array(
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'assets/front-end/js/general/index.min.js',
+        );
+        $css_paths = array(
+            EAEL_PLUGIN_PATH . DIRECTORY_SEPARATOR . "assets/front-end/css/general/index.min.css",
+        );
+
         // collect library scripts & styles
-        $js_paths  = $this->generate_dependency($elements, 'js', $context);
-        $css_paths = $this->generate_dependency($elements, 'css', $context);
+        $js_paths  = array_merge($js_paths, $this->generate_dependency($elements, 'js'));
+        $css_paths = array_merge($css_paths, $this->generate_dependency($elements, 'css'));
 
         // combine files
         $this->combine_files($css_paths, ($file_name ? $file_name : 'eael') . '.min.css');
@@ -192,6 +184,10 @@ trait Generator
     public function generate_frontend_scripts()
     {
         if ($this->is_preview_mode()) {
+            return;
+        }
+
+        if (!Plugin::$instance->frontend->has_elementor_in_page()) {
             return;
         }
 
@@ -236,23 +232,23 @@ trait Generator
         sort($old_elements);
 
         if ($old_elements != $elements) {
-            set_transient('eael_transient_elements_' . $this->request_uid, $elements, MONTH_IN_SECONDS);
+            set_transient('eael_transient_elements_' . $this->request_uid, $elements, YEAR_IN_SECONDS);
 
+            // if not empty elements, regenerate cache files
             if (!empty($elements)) {
-                // load fallback assets
-                $this->enqueue_protocols($this->request_uid);
+                $this->generate_scripts($elements, $this->request_uid);
 
-                // generate cache files
-                $this->generate_scripts($elements, $this->request_uid, 'view');
+                // load generated files - fallback
+                $this->enqueue_protocols($this->request_uid);
             }
         }
 
-        // if no cache files, generate new
+        // // if no cache files, generate new
         if (!$this->has_cache_files($this->request_uid)) {
-            $this->generate_scripts($elements, $this->request_uid, 'view');
+            $this->generate_scripts($elements, $this->request_uid);
         }
 
-        // if no elements, remove cache files
+        // // if no elements, remove cache files
         if (empty($elements)) {
             $this->remove_files($this->request_uid);
         }

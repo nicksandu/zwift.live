@@ -1,6 +1,6 @@
 var $j = jQuery.noConflict();
 
-$j( document ).ready( function() {
+$j( document ).on( 'ready', function() {
 	"use strict";
 	// Header search form label
 	oceanwpHeaderSearchForm();

@@ -1,7 +1,7 @@
 var $j 		= jQuery.noConflict(),
 	$window = $j( window );
 
-$j( document ).ready( function() {
+$j( document ).on( 'ready', function() {
 	"use strict";
 	// Mega menu
 	oceanwpMegaMenu();
