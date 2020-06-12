@@ -4,15 +4,15 @@ Tags: elementor, elements, addons, elementor addon, elementor widget, elementor 
 Requires at least: 4.0
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 3.9.2
+Stable tag: 4.0.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-The Essential plugin you install after Elementor! 65+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
+The Essential plugin you install after Elementor! 70+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
 
 == Description ==
 
-Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 65+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
+Enhance your [Elementor](https://wordpress.org/plugins/elementor/) page building experience with 70+ creative elements and extensions. Add powers to your page builder using our easy-to-use elements those were designed to make your next WordPress page and posts design easier and prettier than ever before.
 
 
 [Check the Demos](https://essential-addons.com/elementor/)
@@ -41,9 +41,9 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 ### [Elementor](https://wordpress.org/plugins/elementor/) page builder is required for this plugin.
 
 
-### 38+ FREE WIDGETS AND COUNTING
+### 40+ FREE WIDGETS AND COUNTING
 
-We have designed 38 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 39 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -74,15 +74,17 @@ We have designed 38 of the most useful widgets to enhance your Elementor Page Bu
 27. [Advanced Accordion](https://essential-addons.com/elementor/advanced-accordion/) - Add beautiful accordions in your pages, posts, and anywhere. Supports nested accordions.
 28. [Progress Bar](https://essential-addons.com/elementor/progress-bar/) - Display progress bars with 4+ different styles
 29. [Feature List](https://essential-addons.com/elementor/feature-list/) - Display feature lists with custom icons and styles
-30. [FluentForm](https://essential-addons.com/elementor/fluentform/) - Design your FluentForm container, fields and anything you want
+30. [Fluent Form](https://essential-addons.com/elementor/fluentform/) - Design your Fluent Form container, fields and anything you want
 31. [Facebook Feed](https://essential-addons.com/elementor/facebook-feed/) - Display Facebook post feed from your page
 32. [Sticky Video](https://essential-addons.com/elementor/sticky-video/) - Create cool video from YouTube, Vimeo or self-hosted that will be sticky on scroll while playing.
 33. [BetterDocs Category Grid](https://essential-addons.com/elementor/betterdocs-category-grid/) - Cretae custom Knowledge Base layout with BetterDocs Category List.
 34. [BetterDocs Category Box](https://essential-addons.com/elementor/betterdocs-category-box/) - Cretae custom box-style Knowledge Base layout with BetterDocs Category List.
 35. [BetterDocs Search Form](https://essential-addons.com/elementor/betterdocs-search-form/) - Place and design a cool live search box for BetterDocs Documentation
-36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible free-addon
+36. [Advanced Data Table](https://essential-addons.com/elementor/advanced-data-table) - Create flexible table within Elementor with best possible free addon
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
+39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
+40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor. 
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -115,7 +117,8 @@ We have designed 38 of the most useful widgets to enhance your Elementor Page Bu
 26. [Protected Content](https://essential-addons.com/elementor/protected-content/) - Lock your content with password and allow only selected people to see it
 27. [Offcanvas Content](https://essential-addons.com/elementor/offcanvas-content/) - Display content in off canvas and show them with button/element click
 28. [Advanced Menu](https://essential-addons.com/elementor/advanced-menu/) - Use advanced navigation menu anywhere. Choose design from different skins and customize.
-29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panoromic or long height images within image scroller widget.
+29. [Image Scroller](https://essential-addons.com/elementor/image-scroller/) - Show your panoramic or long height images within image scroller widget.
+
 
 Extensions (Free): 
 
@@ -131,7 +134,7 @@ Extensions (Pro):
 4. [Content Protection](https://essential-addons.com/elementor/content-protection/) - Lock your content with password and allow only selected people to see it.
 
 
-More coming soon (weekly update) ...
+More features and improvements are coming on regular updates. 
 
 
 ### 🏆 FEATURED BY Top Reviewers
@@ -174,11 +177,14 @@ https://www.youtube.com/watch?v=6811orBQcJc
 If you like Essential Addons, then consider checking out our other WordPress Plugins:
 
 
-🔔**[NotificationX](https://notificationx.com/)** – Best Social Proof & FOMO Marketing Solution to increase conversion rates.
+🔔 **[NotificationX](https://notificationx.com/)** – Best Social Proof & FOMO Marketing Solution to increase conversion rates.
 
 🗒️ **[BetterDocs](https://betterdocs.co/)** – Best Documentation & Knowledge Base Plugin for WordPress, which also reduce your manual support request.
 
-⏰**[WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
+⏰ **[WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/)**  – Complete solution for WordPress Post Scheduling to manage schedules through an editorial calendar & Social Share.
+
+
+⭐ **[ReviewX](https://wordpress.org/plugins/reviewx/)**  – Advanced multi criteria Rating & Reviews for WooCommerce that allows users to submit product review for multiple criteria.
 
 
 == Installation ==
@@ -217,6 +223,59 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.0.3 - 11/06/2020 =
+- Fixed: EA Filterable Gallery Image Overlapping issue with Lazyload- WP Rocket
+- Fixed: EA Feature List Default Arrow Indicator Position issue 
+- Fixed: EA Table of Content appearing at the bottom for Gutenberg posts
+- Fixed: EA Post Grid issue with Load More 'Grid' layout becoming Masonry
+- Fixed: EA Post Grid issue with PressForward plugin
+- Fixed: EA Sticky Video Icon overlapping issue
+- Few minor bugfix and improvements
+
+= 4.0.2 - 04/06/2020 =
+- Improvement : EA Post Grid | Added margin & padding controls for Thumbnail & Content, and 2 more preset layouts
+- Improvement : EA Creative Buttons | Added Gradient background color option, and border radius option
+- Improvement : EA Advanced Accordion | Added options to style the icons, and Spacing option between each accordion
+- Improvement : EA Countdown | Added background gradient option, separator styles, and List View option
+- Improvement : EA Pricing Table | Added Gradient background color for buttons
+- Improvement : EA Call to Action | Added Gradient Background, Multiple Buttons, and Sub-heading options
+- Improvement : EA Feature List | Added Radius corner for Icon Box, Individual Icon & List Styling, and Icon padding options
+- Improvement : EA Testimonials | Added spacing options for content, and more Styling layouts
+- Improvement : EA Image Accordion | Added content alignment, and image styling options
+- Fixed : Responsive issue for EA Feature List when connector is enabled
+- Few minor bug fix and improvements 
+
+
+= 4.0.1 - 28/05/2020 =
+- Fixed: PHP 7.4 compatibility
+
+= 4.0.0 - 21/05/2020 =
+- Added: EA Typeform widget
+- Added: Compatibility with WooCommerce 4.1.0
+- Added: Heading Tags for EA Filterable Gallery
+- Added: Inline editing for EA Advanced Data Table
+- Added: Option to exclude/include Heading tags by Selector ID for EA TOC
+- Improvement: Code Splitting for better performance
+- Fixed: EA Filterable Gallery not playing Videos
+- Fixed: Conflict with WooCommerce Checkout
+- Fixed: PHP errors for EA Post Timeline
+- Fixed: Hover Card style issue with EA Post Grid
+- Lots of minor bugfix and improvements
+
+= 3.9.4 - 03/05/2020 =
+- Fixed: Image Accordion not showing 'Horizontal' layout
+- Fixed: Info Box not showing 'Margin' option in 'Advanced' tab
+
+= 3.9.3 - 29/04/2020 =
+- Added: EA Woo Checkout element
+- Added: Vertical Layout for Image Accordion
+- Added: Post Grid option to open links in new tab
+- Fixed: Filterable Gallery with Shortened YouTube URL
+- Fixed: Filterable Gallery caption issue
+- Fixed: Gravity Forms styling issue
+- Fixed: Post Grid title length issue
+- Few minor bug fix and improvements
 
 = 3.9.2 - 12/04/2020 =
 - Added: Formstack Widget
@@ -358,7 +417,7 @@ Your existing elements/content will work with premium version. So you won't lose
 - Few minor bugfix and improvements
 
 = 3.4.0 - 10/10/2019 =
-- Added: FluentForm styler
+- Added: Fluent Form styler
 - Added: "EA Duplicator" extension to duplicate any page/post
 - Fixed: New elements not active by default
 - Few minor bugfix and improvements
